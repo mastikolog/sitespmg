@@ -119,11 +119,10 @@
 
 
     /* ============================================================
-       ЗАГРУЗОЧНЫЙ ЭКРАН
+       ЗАГРУЗОЧНЫЙ ЭКРАН (НОВАЯ ВЕРСИЯ)
        ============================================================ */
     #boot {
       --bg: #05070a;
-      --panel: #080c10;
       --border: #384453;
       --text: #b9ffd0;
       --dim: #63806e;
@@ -153,13 +152,14 @@
       pointer-events: none;
     }
 
+    /* CRT static/noise */
     #boot::before {
       content: "";
       position: absolute;
       inset: -50%;
       z-index: -3;
       pointer-events: none;
-      opacity: 0.11;
+      opacity: 0.08;
       background:
         repeating-radial-gradient(
           circle at 17% 32%,
@@ -175,13 +175,14 @@
       animation: bootNoise 0.13s steps(2, end) infinite;
     }
 
+    /* CRT scanlines */
     #boot::after {
       content: "";
       position: absolute;
       inset: 0;
       z-index: 20;
       pointer-events: none;
-      opacity: 0.18;
+      opacity: 0.14;
       background:
         repeating-linear-gradient(
           to bottom,
@@ -202,8 +203,8 @@
         radial-gradient(
           ellipse at center,
           transparent 45%,
-          rgba(0, 0, 0, 0.18) 65%,
-          rgba(0, 0, 0, 0.72) 100%
+          rgba(0, 0, 0, 0.12) 65%,
+          rgba(0, 0, 0, 0.45) 100%
         );
     }
 
@@ -277,6 +278,10 @@
       color: var(--dim);
       text-shadow: none;
     }
+    .boot-line.success {
+      color: var(--green);
+      text-shadow: 0 0 5px rgba(117, 255, 154, 0.6);
+    }
 
     .boot-prompt {
       display: none;
@@ -312,15 +317,15 @@
 
     #accessKey:disabled { opacity: 0.7; }
 
-    /* ===== НОВЫЙ КУРСОР (СЛЕДУЕТ ЗА ТЕКСТОМ, КАК В КОМАНДНОЙ СТРОКЕ) ===== */
+    /* ===== ЗЕЛЁНЫЙ МИГАЮЩИЙ ПРЯМОУГОЛЬНИК (ВМЕСТО КУРСОРА) ===== */
     .input-cursor {
       display: inline-block;
       width: 0.7em;
       height: 1.2em;
-      margin-left: 0;
+      margin-left: 2px;
       background: var(--green);
-      box-shadow: 0 0 6px rgba(117, 255, 154, 0.8), 0 0 15px rgba(117, 255, 154, 0.25);
-      animation: cursorBlink 0.72s steps(2, end) infinite;
+      box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
+      animation: cursorBlink 0.6s steps(2, end) infinite;
       vertical-align: text-bottom;
     }
 
@@ -347,6 +352,12 @@
       margin-bottom: 9px;
       color: var(--green);
       font-weight: bold;
+      animation: pulseText 1.2s ease-in-out infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     .boot-progress {
@@ -884,7 +895,7 @@
   <div class="noise" aria-hidden="true"></div>
 
   <!-- ============================================================
-       ЗАГРУЗОЧНЫЙ ЭКРАН
+       ЗАГРУЗОЧНЫЙ ЭКРАН (НОВАЯ ВЕРСИЯ)
        ============================================================ -->
   <div id="boot" aria-label="SPMG system boot screen">
     <div class="boot-vignette"></div>
@@ -1366,20 +1377,27 @@
       "use strict";
 
       // ============================================================
-      // JS ДЛЯ ЗАГРУЗОЧНОГО ЭКРАНА
+      // JS ДЛЯ ЗАГРУЗОЧНОГО ЭКРАНА (НОВАЯ ВЕРСИЯ)
       // ============================================================
       const CORRECT_PASSWORD = "SPMG";
 
+      // БОЛЬШЕ ТЕКСТА — БЫСТРАЯ ПРОКРУТКА ЛОГОВ
       const LOGS = [
         { text: "Инициализация основных протоколов SPMG...", className: "" },
         { text: "Загрузка матрицы безопасности...", className: "" },
+        { text: "Проверка целостности ядра системы...", className: "" },
         { text: "[КРИТИЧНО] Обнаружена попытка несанкционированного доступа.", className: "critical" },
         { text: "Целостность системы нарушена. Вход в аварийную оболочку.", className: "" },
-        { text: "Запуск протокола обхода блокировки.", className: "" }
+        { text: "Запуск протокола обхода блокировки...", className: "" },
+        { text: "Выполняется проверка ключа доступа...", className: "" },
+        { text: "Установка защищённого канала связи...", className: "dim" },
+        { text: "Подтверждение идентификации объекта SPMG-03...", className: "" },
+        { text: "Синхронизация с центральным узлом...", className: "dim" },
+        { text: "Ожидание ввода ключа доступа.", className: "success" }
       ];
 
-      const TYPE_SPEED = 25;
-      const LINE_DELAY = 240;
+      const TYPE_SPEED = 12; // БЫСТРЕЕ
+      const LINE_DELAY = 100; // КОРОЧЕ ПАУЗА
       const GLITCH_SYMBOLS = "@#$%&?!";
 
       const boot = document.getElementById("boot");
@@ -1395,6 +1413,31 @@
       const progressContainer = document.querySelector(".boot-progress");
       const inputCursor = document.getElementById("inputCursor");
 
+      // ===== ЗВУКИ =====
+      let audioContext = null;
+      let soundEnabled = true;
+
+      function playBeep(freq = 620, dur = 0.04, vol = 0.03) {
+        if (!soundEnabled) return;
+        try {
+          audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.type = 'square';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(vol, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + dur);
+          osc.connect(gain).connect(audioContext.destination);
+          osc.start();
+          osc.stop(audioContext.currentTime + dur);
+        } catch (_) {}
+      }
+
+      function playKeySound() { playBeep(720, 0.025, 0.02); }
+      function playSuccessSound() { playBeep(1040, 0.12, 0.035); }
+      function playErrorSound() { playBeep(180, 0.18, 0.04); }
+      function playClickSound() { playBeep(560, 0.03, 0.025); }
+
       const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
       function randomItem(array) { return array[Math.floor(Math.random() * array.length)]; }
       function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
@@ -1406,7 +1449,8 @@
 
         for (let i = 0; i < text.length; i++) {
           line.textContent += text[i];
-          const variation = Math.random() < 0.08 ? randomInt(45, 100) : TYPE_SPEED;
+          if (text[i] !== ' ') playKeySound();
+          const variation = Math.random() < 0.08 ? randomInt(25, 60) : TYPE_SPEED;
           await sleep(variation);
         }
         await sleep(LINE_DELAY);
@@ -1425,7 +1469,7 @@
         updateCursor();
       }
 
-      // ===== КУРСОР СЛЕДУЕТ ЗА ТЕКСТОМ В ПОЛЕ ВВОДА =====
+      // ===== ЗЕЛЁНЫЙ МИГАЮЩИЙ ПРЯМОУГОЛЬНИК (СЛЕДУЕТ ЗА ТЕКСТОМ) =====
       function updateCursor() {
         const cursor = inputCursor;
         if (accessKey.disabled || boot.classList.contains('is-fading')) {
@@ -1434,7 +1478,7 @@
         }
         cursor.classList.remove('hidden');
         const textLength = accessKey.value.length;
-        const charWidth = 9.5; 
+        const charWidth = 9.5;
         const cursorPosition = textLength * charWidth;
         cursor.style.marginLeft = cursorPosition + 'px';
         cursor.style.visibility = 'visible';
@@ -1443,6 +1487,7 @@
 
       let glitchTimer = null;
       accessKey.addEventListener("input", () => {
+        playKeySound();
         clearTimeout(glitchTimer);
         const value = accessKey.value;
         if (!value) return;
@@ -1484,6 +1529,7 @@
       accessKey.addEventListener("keydown", (event) => {
         if (event.key !== "Enter" || locked) return;
         event.preventDefault();
+        playClickSound();
         const entered = accessKey.value;
         if (entered === CORRECT_PASSWORD) {
           beginDecryption();
@@ -1493,6 +1539,7 @@
       });
 
       function denyAccess() {
+        playErrorSound();
         feedback.textContent = "ДОСТУП ЗАПРЕЩЁН";
         terminal.classList.remove("terminal-shake");
         void terminal.offsetWidth;
@@ -1508,6 +1555,7 @@
       }
 
       function beginDecryption() {
+        playSuccessSound();
         locked = true;
         accessKey.disabled = true;
         inputCursor.classList.add('hidden');
@@ -1534,6 +1582,7 @@
       }
 
       function finishLaunch() {
+        playSuccessSound();
         launchMessage.classList.add("visible");
         setTimeout(() => {
           boot.classList.add("is-fading");
@@ -1582,8 +1631,8 @@
       const soundToggle = document.getElementById('soundToggle');
       const contrastToggle = document.getElementById('contrastToggle');
       
-      let audioContext = null;
-      let soundEnabled = false;
+      let audioContext2 = null;
+      let soundEnabled2 = false;
 
       function updateDate() {
         dateOutput.textContent = new Intl.DateTimeFormat('ru-RU', {
@@ -1592,17 +1641,17 @@
       }
 
       function beep(frequency = 620, duration = 0.035) {
-        if (!soundEnabled) return;
-        audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
+        if (!soundEnabled2) return;
+        audioContext2 ||= new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext2.createOscillator();
+        const gain = audioContext2.createGain();
         oscillator.type = 'square';
         oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(0.025, audioContext.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
-        oscillator.connect(gain).connect(audioContext.destination);
+        gain.gain.setValueAtTime(0.025, audioContext2.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext2.currentTime + duration);
+        oscillator.connect(gain).connect(audioContext2.destination);
         oscillator.start();
-        oscillator.stop(audioContext.currentTime + duration);
+        oscillator.stop(audioContext2.currentTime + duration);
       }
 
       function toggleSection(button, forceOpen) {
@@ -1727,10 +1776,10 @@
       });
 
       soundToggle.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        soundToggle.setAttribute('aria-pressed', String(soundEnabled));
-        soundToggle.textContent = `ЗВУК: ${soundEnabled ? 'ВКЛ' : 'ВЫКЛ'}`;
-        if (soundEnabled) beep(720, .06);
+        soundEnabled2 = !soundEnabled2;
+        soundToggle.setAttribute('aria-pressed', String(soundEnabled2));
+        soundToggle.textContent = `ЗВУК: ${soundEnabled2 ? 'ВКЛ' : 'ВЫКЛ'}`;
+        if (soundEnabled2) beep(720, .06);
       });
 
       contrastToggle.addEventListener('click', () => {
