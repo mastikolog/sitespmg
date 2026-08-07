@@ -304,7 +304,6 @@
       outline: none;
       background: transparent;
       color: var(--white);
-      caret-color: transparent;
       font: inherit;
       font-weight: bold;
       letter-spacing: 0.15em;
@@ -313,15 +312,20 @@
 
     #accessKey:disabled { opacity: 0.7; }
 
-    .block-cursor {
+    /* ===== НОВЫЙ КУРСОР (СЛЕДУЕТ ЗА ТЕКСТОМ, КАК В КОМАНДНОЙ СТРОКЕ) ===== */
+    .input-cursor {
       display: inline-block;
-      width: 9px;
-      height: 1.15em;
-      margin-left: 3px;
-      vertical-align: -0.18em;
+      width: 0.7em;
+      height: 1.2em;
+      margin-left: 0;
       background: var(--green);
       box-shadow: 0 0 6px rgba(117, 255, 154, 0.8), 0 0 15px rgba(117, 255, 154, 0.25);
       animation: cursorBlink 0.72s steps(2, end) infinite;
+      vertical-align: text-bottom;
+    }
+
+    .input-cursor.hidden {
+      display: none;
     }
 
     .boot-feedback {
@@ -373,6 +377,7 @@
 
     .launch-message.visible { display: block; }
 
+    /* Random horizontal damaged-display glitch */
     .glitch-line {
       position: absolute;
       left: 0;
@@ -693,10 +698,11 @@
     .section__toggle[aria-expanded="true"] + .section__body { grid-template-rows: 1fr; border-top-width: 1px; }
     .section__content { padding: clamp(18px, 3vw, 30px); }
 
+    /* ===== УМЕНЬШЕННЫЙ ОТСТУП ДЛЯ ПУНКТОВ УСТАВА ===== */
     .record {
       display: grid;
-      grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
-      gap: 18px;
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 12px;
       padding: 15px 0;
       border-bottom: 1px solid rgba(103,245,138,.1);
       text-align: left;
@@ -856,7 +862,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      #boot::before, .boot-terminal, .status-light, .block-cursor, .terminal-shake { animation: none !important; }
+      #boot::before, .boot-terminal, .status-light, .input-cursor, .terminal-shake { animation: none !important; }
     }
 
     @media print {
@@ -886,10 +892,10 @@
 
     <section class="boot-terminal" id="bootTerminal">
       <header class="terminal-header">
-        <span>SPMG // ЗАЩИЩЁННЫЙ ТЕРМИНАЛ</span>
+        <span>SPMG [] ЗАЩИЩЁННЫЙ ТЕРМИНАЛ</span>
         <span class="terminal-status">
           <span class="status-light"></span>
-          <span>СВЯЗЬ АКТИВНА</span>
+          <span>КАНАЛ АКТИВЕН</span>
         </span>
       </header>
 
@@ -899,7 +905,7 @@
         <div id="bootPrompt" class="boot-prompt">
           <span class="prompt-label">КЛЮЧ ДОСТУПА:</span>
           <input id="accessKey" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ключ доступа" maxlength="32" />
-          <span class="block-cursor" aria-hidden="true"></span>
+          <span class="input-cursor" id="inputCursor"></span>
         </div>
 
         <div id="bootFeedback" class="boot-feedback"></div>
@@ -925,9 +931,9 @@
     <!-- ШАПКА САЙТА -->
     <header class="masthead">
       <div class="brand">
-        <p class="brand__kicker">ЧАСТНАЯ ПРОМЫШЛЕННАЯ РАЗВЕДЫВАТЕЛЬНАЯ СЕТЬ // ОСН. 2057</p>
+        <p class="brand__kicker">СЛУЖЕБНАЯ СЕТЬ ПЕРЕДАЧИ ДАННЫХ [] ОСН. 2057</p>
         <h1 class="brand__title" data-text="AURUM CORP.">AURUM CORP.</h1>
-        <p class="brand__subtitle">SPMG // СИСТЕМА КОНТРОЛЯ ДОСТУПА К АРХИВАМ — УРОВЕНЬ 1</p>
+        <p class="brand__subtitle">ОТДЕЛ SPMG [] ДИДАКТИЧЕСКИЙ МАТЕРИАЛ - УРОВЕНЬ 1</p>
       </div>
       <dl class="meta" aria-label="Системная информация">
         <div class="meta__row"><dt>ВЕРСИЯ</dt><dd>2.0.1</dd></div>
@@ -949,7 +955,7 @@
     </nav>
 
     <div class="auth-banner" role="status">
-      <span>ЗАПРОС ДОСТУПА {УРОВЕНЬ 1} // УЧЁТНЫЕ ДАННЫЕ ПРОВЕРЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+      <span>ЗАПРОС ДОСТУПА {УРОВЕНЬ 1} [] УЧЁТНЫЕ ДАННЫЕ ПРОВЕРЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
       <span class="auth-banner__line" aria-hidden="true"></span>
       <span class="auth-banner__code">СЕССИЯ: SPMG-USER03</span>
     </div>
@@ -1108,7 +1114,7 @@
             <span class="section__number">05</span>
             <span>
               <span class="section__title">Секретный раздел 5</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-5">
@@ -1134,7 +1140,7 @@
             <span class="section__number">06</span>
             <span>
               <span class="section__title">Секретный раздел 6</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-6">
@@ -1160,7 +1166,7 @@
             <span class="section__number">07</span>
             <span>
               <span class="section__title">Секретный раздел 7</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-7">
@@ -1249,7 +1255,7 @@
             <span class="section__number">11</span>
             <span>
               <span class="section__title">Секретный раздел 11</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-11">
@@ -1275,7 +1281,7 @@
             <span class="section__number">12</span>
             <span>
               <span class="section__title">Секретный раздел 12</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-12">
@@ -1301,7 +1307,7 @@
             <span class="section__number">13</span>
             <span>
               <span class="section__title">Секретный раздел 13</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-13">
@@ -1340,7 +1346,7 @@
   <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВВОДА ПАРОЛЯ -->
   <dialog class="modal" id="accessModal" aria-labelledby="modalTitle">
     <div class="modal__header">
-      <span>ЗАПРОС ДОСТУПА // SPMG-403</span>
+      <span>ЗАПРОС ДОСТУПА [] SPMG-403</span>
       <button class="modal__close" id="modalClose" type="button" aria-label="Закрыть окно">×</button>
     </div>
     <div class="modal__body">
@@ -1387,6 +1393,7 @@
       const launchMessage = document.getElementById("launchMessage");
       const glitchLine = document.getElementById("glitchLine");
       const progressContainer = document.querySelector(".boot-progress");
+      const inputCursor = document.getElementById("inputCursor");
 
       const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
       function randomItem(array) { return array[Math.floor(Math.random() * array.length)]; }
@@ -1415,6 +1422,23 @@
       function showPrompt() {
         bootPrompt.classList.add("visible");
         setTimeout(() => { accessKey.focus(); }, 50);
+        updateCursor();
+      }
+
+      // ===== КУРСОР СЛЕДУЕТ ЗА ТЕКСТОМ В ПОЛЕ ВВОДА =====
+      function updateCursor() {
+        const cursor = inputCursor;
+        if (accessKey.disabled || boot.classList.contains('is-fading')) {
+          cursor.classList.add('hidden');
+          return;
+        }
+        cursor.classList.remove('hidden');
+        const textLength = accessKey.value.length;
+        const charWidth = 9.5; 
+        const cursorPosition = textLength * charWidth;
+        cursor.style.marginLeft = cursorPosition + 'px';
+        cursor.style.visibility = 'visible';
+        requestAnimationFrame(updateCursor);
       }
 
       let glitchTimer = null;
@@ -1437,6 +1461,7 @@
           accessKey.dataset.glitch = "";
           accessKey.classList.remove("input-glitch");
         }, 100);
+        updateCursor();
       });
 
       const glitchStyle = document.createElement("style");
@@ -1478,12 +1503,14 @@
           terminal.classList.remove("terminal-shake");
           feedback.textContent = "";
           accessKey.focus();
+          updateCursor();
         }, 1500);
       }
 
       function beginDecryption() {
         locked = true;
         accessKey.disabled = true;
+        inputCursor.classList.add('hidden');
         feedback.textContent = "";
         progressWrap.classList.add("visible");
 
@@ -1655,7 +1682,7 @@
           section.classList.remove('section--redacted');
           section.classList.add('section--unlocked');
           section.dataset.redacted = 'false';
-          section.querySelector('.section__class').textContent = 'АВАРИЙНЫЙ ДОСТУП // СЕССИЯ ЗАЛОГИРОВАНА';
+          section.querySelector('.section__class').textContent = 'АВАРИЙНЫЙ ДОСТУП [] СЕССИЯ ЗАЛОГИРОВАНА';
           section.querySelector('.section__toggle').setAttribute('aria-expanded', 'true');
         });
         document.querySelectorAll('.index-list .restricted').forEach((link) => link.classList.remove('restricted'));
