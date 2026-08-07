@@ -912,15 +912,15 @@
     <!-- ШАПКА САЙТА -->
     <header class="masthead">
       <div class="brand">
-        <p class="brand__kicker">PRIVATE IDUSTRIAL INTELLIGENCE NETWORK // EST. 2057</p>
+        <p class="brand__kicker">PRIVATE IDUSTRIAL INTELLIGENCE NETWORK [] EST. 2057</p>
         <h1 class="brand__title" data-text="AURUM CORP.">AURUM CORP.</h1>
-        <p class="brand__subtitle">SPMG // ARCHIVE ACCESS CONTROL SYSTEM - УРОВЕНЬ 1</p>
+        <p class="brand__subtitle">SPMG [] ARCHIVE ACCESS CONTROL SYSTEM - LEVEL 1</p>
       </div>
       <dl class="meta" aria-label="Системная информация">
         <div class="meta__row"><dt>VERSION</dt><dd>2.0.1</dd></div>
         <div class="meta__row"><dt>DATE</dt><dd id="currentDate">--.--.----</dd></div>
         <div class="meta__row"><dt>DEPARTMENT</dt><dd>SPMG-03</dd></div>
-        <div class="meta__row"><dt>STATUS</dt><dd><span class="status" tabindex="0">СИСТЕМА АКТИВНА</span></dd></div>
+        <div class="meta__row"><dt>STATUS</dt><dd><span class="status" tabindex="0">SYSTEM ACTIVE</span></dd></div>
       </dl>
     </header>
 
@@ -936,7 +936,7 @@
     </nav>
 
     <div class="auth-banner" role="status">
-      <span>ACCESS REQUEST (LVL 1) // CREDENTIALS VERIFIED — SECURITY PROTOCOL ACTIVE</span>
+      <span>ACCESS REQUEST {LVL 1} [] CREDENTIALS VERIFIED — SECURITY PROTOCOL ACTIVE</span>
       <span class="auth-banner__line" aria-hidden="true"></span>
       <span class="auth-banner__code">SESSION: SPMG-USER03</span>
     </div>
@@ -1121,7 +1121,7 @@
             <span class="section__number">06</span>
             <span>
               <span class="section__title">Секретный раздел 6</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-6">
@@ -1147,7 +1147,7 @@
             <span class="section__number">07</span>
             <span>
               <span class="section__title">Секретный раздел 7</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-7">
@@ -1236,7 +1236,7 @@
             <span class="section__number">11</span>
             <span>
               <span class="section__title">Секретный раздел 11</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-11">
@@ -1262,7 +1262,7 @@
             <span class="section__number">12</span>
             <span>
               <span class="section__title">Секретный раздел 12</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-12">
@@ -1288,7 +1288,7 @@
             <span class="section__number">13</span>
             <span>
               <span class="section__title">Секретный раздел 13</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-13">
@@ -1314,13 +1314,13 @@
     <!-- ПРЕДУПРЕЖДЕНИЕ ВНИЗУ -->
     <section class="restriction" aria-label="Предупреждение об ограничении доступа">
       <h2 class="restriction__title">Доступ ограничен</h2>
-      <p>Вы просматриваете сокращенную копию документа с уровнем допуска 3. Для получения полного доступа требуется авторизация.</p>
+      <p>Вы просматриваете сокращенную копию документа с уровнем допуска 1. Для получения полного доступа требуется авторизация.</p>
     </section>
 
     <!-- ПОДВАЛ -->
     <footer class="footer">
       <span><strong>УВЕДОМЛЕНИЕ:</strong> ТОЛЬКО ДЛЯ СОТРУДНИКОВ SPMG</span>
-      <span class="level-badge">УРОВЕНЬ 3</span>
+      <span class="level-badge">УРОВЕНЬ 1</span>
     </footer>
   </div>
 
@@ -1638,11 +1638,11 @@
       function unlockArchive() {
         document.querySelectorAll('.section--redacted').forEach((section) => {
           const redaction = section.querySelector('.redaction');
-          redaction.outerHTML = `<div class="section__content unlocked-record"><div class="record"><h2 class="record__label">Аварийная дешифрация</h2><p class="record__value">${unlockedContent[section.id]}</p></div></div>`;
+          redaction.outerHTML = `<div class="section__content unlocked-record"><div class="record"><h2 class="record__label">Emergency decryption</h2><p class="record__value">${unlockedContent[section.id]}</p></div></div>`;
           section.classList.remove('section--redacted');
           section.classList.add('section--unlocked');
           section.dataset.redacted = 'false';
-          section.querySelector('.section__class').textContent = 'АВАРИЙНЫЙ ДОСТУП // СЕССИЯ ЗАЛОГИРОВАНА';
+          section.querySelector('.section__class').textContent = 'EMERGENCY ACCESS // THE SESSION IS BOOKED';
           section.querySelector('.section__toggle').setAttribute('aria-expanded', 'true');
         });
         document.querySelectorAll('.index-list .restricted').forEach((link) => link.classList.remove('restricted'));
@@ -1652,7 +1652,7 @@
         event.preventDefault();
         const code = passwordInput.value.trim().toUpperCase();
         breachLog.classList.add('active');
-        breachLog.textContent = '> ПРОВЕРКА ТОКЕНА\n> ОБРАЩЕНИЕ К ХРАНИЛИЩУ\n> РАСШИФРОВКА...';
+        breachLog.textContent = '> TOKEN CHECK\n> APPEAL TO THE STORAGE FACILITY\n> DECRYPTION...';
         passwordInput.disabled = true;
         passwordForm.querySelector('button').disabled = true;
         window.setTimeout(() => {
@@ -1666,7 +1666,7 @@
           } else {
             breachLog.textContent += '\n> ТОКЕН ОТКЛОНЕН\n> ИНЦИДЕНТ ЗАЛОГИРОВАН';
             formMessage.style.color = 'var(--red)';
-            formMessage.textContent = 'КОД ОТКЛОНЕН. ПОПЫТКА ЗАРЕГИСТРИРОВАНА.';
+            formMessage.textContent = 'CODE REJECTED. ATTEMPT REGISTERED.';
             beep(120, .18);
           }
           passwordInput.disabled = false;
