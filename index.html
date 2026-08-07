@@ -119,7 +119,7 @@
 
 
     /* ============================================================
-       НОВЫЙ ЗАГРУЗОЧНЫЙ ЭКРАН (СГЕНЕРИРОВАННЫЙ GPT + ДОРАБОТКИ)
+       ЗАГРУЗОЧНЫЙ ЭКРАН
        ============================================================ */
     #boot {
       --bg: #05070a;
@@ -153,7 +153,6 @@
       pointer-events: none;
     }
 
-    /* CSS-only CRT static/noise */
     #boot::before {
       content: "";
       position: absolute;
@@ -176,7 +175,6 @@
       animation: bootNoise 0.13s steps(2, end) infinite;
     }
 
-    /* CRT scanlines */
     #boot::after {
       content: "";
       position: absolute;
@@ -195,7 +193,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* Dark CRT vignette */
     .boot-vignette {
       position: absolute;
       inset: 0;
@@ -376,7 +373,6 @@
 
     .launch-message.visible { display: block; }
 
-    /* Random horizontal damaged-display glitch */
     .glitch-line {
       position: absolute;
       left: 0;
@@ -522,17 +518,26 @@
       text-shadow: 0 0 22px rgba(103, 245, 138, .28);
     }
 
-    .brand__title::before, .brand__title::after {
+    /* ===== ПОСТОЯННЫЙ ГЛИТЧ-ЭФФЕКТ (БЕЗ НАВЕДЕНИЯ) ===== */
+    .brand__title::before,
+    .brand__title::after {
       position: absolute;
       inset: 0;
       pointer-events: none;
       content: attr(data-text);
       opacity: 0;
+      animation: glitchA 1.8s steps(2) infinite, glitchB 2.4s steps(2) infinite;
     }
-    .brand__title::before { color: var(--red); transform: translateX(2px); }
-    .brand__title::after { color: var(--cyan); transform: translateX(-2px); }
-    .brand__title:hover::before { animation: glitchA 700ms steps(2) infinite; }
-    .brand__title:hover::after { animation: glitchB 550ms steps(2) infinite; }
+    .brand__title::before {
+      color: var(--red);
+      transform: translateX(2px);
+      animation-delay: 0s;
+    }
+    .brand__title::after {
+      color: var(--cyan);
+      transform: translateX(-2px);
+      animation-delay: 0.8s;
+    }
 
     .brand__subtitle {
       margin: 18px 0 0;
@@ -557,7 +562,7 @@
     .meta dd { margin: 0; color: var(--green); text-align: right; }
     .status { position: relative; cursor: help; }
     .status::before { display: inline-block; width: 7px; height: 7px; margin-right: 8px; content: ""; border-radius: 50%; background: var(--green-hot); box-shadow: 0 0 10px var(--green-hot); animation: pulse 1.3s ease infinite; }
-    .status::after { position: absolute; right: 0; bottom: -35px; width: max-content; padding: 6px 9px; content: "UPTIME: 8472 HOURS"; color: var(--cyan); border: 1px solid var(--line); background: var(--panel-solid); opacity: 0; transform: translateY(-5px); transition: var(--ease); pointer-events: none; }
+    .status::after { position: absolute; right: 0; bottom: -35px; width: max-content; padding: 6px 9px; content: "ВРЕМЯ РАБОТЫ: 8472 ЧАСА"; color: var(--cyan); border: 1px solid var(--line); background: var(--panel-solid); opacity: 0; transform: translateY(-5px); transition: var(--ease); pointer-events: none; }
     .status:hover::after, .status:focus::after { opacity: 1; transform: none; }
 
     .command-rail {
@@ -690,7 +695,7 @@
 
     .record {
       display: grid;
-      grid-template-columns: minmax(120px, 140px) minmax(0, 1fr);
+      grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
       gap: 18px;
       padding: 15px 0;
       border-bottom: 1px solid rgba(103,245,138,.1);
@@ -798,8 +803,16 @@
     @keyframes headerScan { to { transform: translateY(240%); } }
     @keyframes dataRun { 0%,100% { transform: translateX(-110%); } 50% { transform: translateX(270%); } }
     @keyframes breachScan { to { transform: translateX(100%); } }
-    @keyframes glitchA { 0%,100% { opacity: 0; clip-path: inset(0 0 0 0); } 25% { opacity: .65; clip-path: inset(15% 0 60%); } 50% { opacity: 0; } 75% { opacity: .55; clip-path: inset(70% 0 10%); } }
-    @keyframes glitchB { 0%,100% { opacity: 0; } 30% { opacity: .55; clip-path: inset(45% 0 30%); } 60% { opacity: 0; } 80% { opacity: .5; clip-path: inset(5% 0 80%); } }
+    @keyframes glitchA {
+      0%, 85%, 100% { opacity: 0; clip-path: inset(0 0 0 0); }
+      15%, 30% { opacity: .65; clip-path: inset(10% 0 60%); }
+      45%, 60% { opacity: .55; clip-path: inset(70% 0 20%); }
+    }
+    @keyframes glitchB {
+      0%, 80%, 100% { opacity: 0; }
+      10%, 25% { opacity: .55; clip-path: inset(40% 0 30%); }
+      50%, 70% { opacity: .5; clip-path: inset(5% 0 75%); }
+    }
 
     /* ============================================================
        МЕДИА-ЗАПРОСЫ
@@ -865,7 +878,7 @@
   <div class="noise" aria-hidden="true"></div>
 
   <!-- ============================================================
-       НОВЫЙ ЗАГРУЗОЧНЫЙ ЭКРАН (СГЕНЕРИРОВАННЫЙ GPT)
+       ЗАГРУЗОЧНЫЙ ЭКРАН
        ============================================================ -->
   <div id="boot" aria-label="SPMG system boot screen">
     <div class="boot-vignette"></div>
@@ -873,10 +886,10 @@
 
     <section class="boot-terminal" id="bootTerminal">
       <header class="terminal-header">
-        <span>SPMG // SECURE TERMINAL</span>
+        <span>SPMG // ЗАЩИЩЁННЫЙ ТЕРМИНАЛ</span>
         <span class="terminal-status">
           <span class="status-light"></span>
-          <span>LINK ACTIVE</span>
+          <span>СВЯЗЬ АКТИВНА</span>
         </span>
       </header>
 
@@ -884,22 +897,22 @@
         <div id="bootLog" class="boot-log" aria-live="polite"></div>
 
         <div id="bootPrompt" class="boot-prompt">
-          <span class="prompt-label">ACCESS_KEY:</span>
-          <input id="accessKey" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Access key" maxlength="32" />
+          <span class="prompt-label">КЛЮЧ ДОСТУПА:</span>
+          <input id="accessKey" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ключ доступа" maxlength="32" />
           <span class="block-cursor" aria-hidden="true"></span>
         </div>
 
         <div id="bootFeedback" class="boot-feedback"></div>
 
         <div id="progressWrap" class="boot-progress-wrap">
-          <div class="decrypt-text">DECRYPTING SYSTEM...</div>
+          <div class="decrypt-text">РАСШИФРОВКА СИСТЕМЫ...</div>
           <div class="boot-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div id="progressBar" class="boot-progress-bar"></div>
           </div>
         </div>
 
         <div id="launchMessage" class="launch-message">
-          ACCESS GRANTED. LAUNCHING SHELL.
+          ДОСТУП РАЗРЁШЕН. ЗАПУСК ОБОЛОЧКИ.
         </div>
       </main>
     </section>
@@ -912,39 +925,39 @@
     <!-- ШАПКА САЙТА -->
     <header class="masthead">
       <div class="brand">
-        <p class="brand__kicker">PRIVATE IDUSTRIAL INTELLIGENCE NETWORK [] EST. 2057</p>
+        <p class="brand__kicker">ЧАСТНАЯ ПРОМЫШЛЕННАЯ РАЗВЕДЫВАТЕЛЬНАЯ СЕТЬ // ОСН. 2057</p>
         <h1 class="brand__title" data-text="AURUM CORP.">AURUM CORP.</h1>
-        <p class="brand__subtitle">SPMG [] ARCHIVE ACCESS CONTROL SYSTEM - LEVEL 1</p>
+        <p class="brand__subtitle">SPMG // СИСТЕМА КОНТРОЛЯ ДОСТУПА К АРХИВАМ — УРОВЕНЬ 1</p>
       </div>
       <dl class="meta" aria-label="Системная информация">
-        <div class="meta__row"><dt>VERSION</dt><dd>2.0.1</dd></div>
-        <div class="meta__row"><dt>DATE</dt><dd id="currentDate">--.--.----</dd></div>
-        <div class="meta__row"><dt>DEPARTMENT</dt><dd>SPMG-03</dd></div>
-        <div class="meta__row"><dt>STATUS</dt><dd><span class="status" tabindex="0">SYSTEM ACTIVE</span></dd></div>
+        <div class="meta__row"><dt>ВЕРСИЯ</dt><dd>2.0.1</dd></div>
+        <div class="meta__row"><dt>ДАТА</dt><dd id="currentDate">--.--.----</dd></div>
+        <div class="meta__row"><dt>ОТДЕЛ</dt><dd>SPMG-03</dd></div>
+        <div class="meta__row"><dt>СТАТУС</dt><dd><span class="status" tabindex="0">СИСТЕМА АКТИВНА</span></dd></div>
       </dl>
     </header>
 
     <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
     <nav class="command-rail" aria-label="Инструменты">
       <label class="search-wrap">
-        <span class="sr-only" hidden>SEARCH</span>
-        <input class="search" id="searchInput" type="search" placeholder="SEARCH..." autocomplete="off" aria-label="Поиск">
+        <span class="sr-only" hidden>ПОИСК</span>
+        <input class="search" id="searchInput" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
       </label>
-      <button class="control" id="soundToggle" type="button" aria-pressed="false">SOUND: OFF</button>
-      <button class="control" id="contrastToggle" type="button" aria-pressed="false">CONTRAST</button>
-      <button class="control" id="printButton" type="button">PRINT</button>
+      <button class="control" id="soundToggle" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+      <button class="control" id="contrastToggle" type="button" aria-pressed="false">КОНТРАСТ</button>
+      <button class="control" id="printButton" type="button">ПЕЧАТЬ</button>
     </nav>
 
     <div class="auth-banner" role="status">
-      <span>ACCESS REQUEST {LVL 1} [] CREDENTIALS VERIFIED — SECURITY PROTOCOL ACTIVE</span>
+      <span>ЗАПРОС ДОСТУПА {УРОВЕНЬ 1} // УЧЁТНЫЕ ДАННЫЕ ПРОВЕРЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
       <span class="auth-banner__line" aria-hidden="true"></span>
-      <span class="auth-banner__code">SESSION: SPMG-USER03</span>
+      <span class="auth-banner__code">СЕССИЯ: SPMG-USER03</span>
     </div>
 
     <main class="archive-layout" id="archive">
       <!-- БОКОВОЕ МЕНЮ -->
       <aside class="index-panel" aria-label="Навигация по разделам">
-        <p class="index-panel__label">Реестр устава</p>
+        <p class="index-panel__label">РЕЕСТР УСТАВА</p>
         <ol class="index-list" id="indexList">
           <li><a href="#section-1"><span>01</span><span>Общие положения</span></a></li>
           <li><a href="#section-2"><span>02</span><span>Права и обязанности</span></a></li>
@@ -953,7 +966,7 @@
           <li><a class="restricted" href="#section-5"><span>05</span><span>Раздел ограниченного доступа</span></a></li>
           <li><a class="restricted" href="#section-6"><span>06</span><span>Раздел ограниченного доступа</span></a></li>
           <li><a class="restricted" href="#section-7"><span>07</span><span>Раздел ограниченного доступа</span></a></li>
-          <li><a href="#section-8"><span>08</span><span>Дополнительно</span></a></li>
+          <li><a href="#section-8"><span>08</span><span>Дополнительные сведения</span></a></li>
           <li><a href="#section-9"><span>09</span><span>Примечания</span></a></li>
           <li><a href="#section-10"><span>10</span><span>Архивные материалы</span></a></li>
           <li><a class="restricted" href="#section-11"><span>11</span><span>Раздел ограниченного доступа</span></a></li>
@@ -962,7 +975,7 @@
         </ol>
         <div class="clearance-card">
           <span>ТЕКУЩИЙ ДОПУСК</span>
-          <strong>LVL 1</strong>
+          <strong>УРОВЕНЬ 1</strong>
         </div>
       </aside>
 
@@ -1109,7 +1122,7 @@
                   <span class="redaction__line"></span>
                 </div>
                 <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">CIPHER: SPMG-05</span>
+                <span class="redaction__code">ШИФР: SPMG-05</span>
               </div>
             </div>
           </div>
@@ -1121,7 +1134,7 @@
             <span class="section__number">06</span>
             <span>
               <span class="section__title">Секретный раздел 6</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-6">
@@ -1135,7 +1148,7 @@
                   <span class="redaction__line"></span>
                 </div>
                 <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">CIPHER: SPMG-06</span>
+                <span class="redaction__code">ШИФР: SPMG-06</span>
               </div>
             </div>
           </div>
@@ -1147,7 +1160,7 @@
             <span class="section__number">07</span>
             <span>
               <span class="section__title">Секретный раздел 7</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-7">
@@ -1161,7 +1174,7 @@
                   <span class="redaction__line"></span>
                 </div>
                 <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">CIPHER: SPMG-07</span>
+                <span class="redaction__code">ШИФР: SPMG-07</span>
               </div>
             </div>
           </div>
@@ -1236,7 +1249,7 @@
             <span class="section__number">11</span>
             <span>
               <span class="section__title">Секретный раздел 11</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-11">
@@ -1250,7 +1263,7 @@
                   <span class="redaction__line"></span>
                 </div>
                 <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">CIPHER: SPMG-11</span>
+                <span class="redaction__code">ШИФР: SPMG-11</span>
               </div>
             </div>
           </div>
@@ -1262,7 +1275,7 @@
             <span class="section__number">12</span>
             <span>
               <span class="section__title">Секретный раздел 12</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-12">
@@ -1276,7 +1289,7 @@
                   <span class="redaction__line"></span>
                 </div>
                 <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">CIPHER: SPMG-12</span>
+                <span class="redaction__code">ШИФР: SPMG-12</span>
               </div>
             </div>
           </div>
@@ -1288,7 +1301,7 @@
             <span class="section__number">13</span>
             <span>
               <span class="section__title">Секретный раздел 13</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН [] ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              <span class="section__class">ДОСТУП ОГРАНИЧЕН // ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
             </span>
           </button>
           <div class="section__body" id="content-13">
@@ -1302,7 +1315,7 @@
                   <span class="redaction__line"></span>
                 </div>
                 <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">CIPHER: SPMG-13</span>
+                <span class="redaction__code">ШИФР: SPMG-13</span>
               </div>
             </div>
           </div>
@@ -1314,7 +1327,7 @@
     <!-- ПРЕДУПРЕЖДЕНИЕ ВНИЗУ -->
     <section class="restriction" aria-label="Предупреждение об ограничении доступа">
       <h2 class="restriction__title">Доступ ограничен</h2>
-      <p>Вы просматриваете сокращенную копию документа с уровнем допуска 1. Для получения полного доступа требуется авторизация.</p>
+      <p>Вы просматриваете сокращённую копию документа с уровнем допуска 1. Для получения полного доступа требуется авторизация.</p>
     </section>
 
     <!-- ПОДВАЛ -->
@@ -1347,16 +1360,16 @@
       "use strict";
 
       // ============================================================
-      // JS ДЛЯ ЗАГРУЗОЧНОГО ЭКРАНА (GPT)
+      // JS ДЛЯ ЗАГРУЗОЧНОГО ЭКРАНА
       // ============================================================
       const CORRECT_PASSWORD = "SPMG";
 
       const LOGS = [
-        { text: "Initializing SPMG core protocols...", className: "" },
-        { text: "Loading security matrix...", className: "" },
-        { text: "[CRITICAL] Unauthorized access attempt detected.", className: "critical" },
-        { text: "System integrity compromised. Entering emergency shell.", className: "" },
-        { text: "Initiate lockdown bypass protocol.", className: "" }
+        { text: "Инициализация основных протоколов SPMG...", className: "" },
+        { text: "Загрузка матрицы безопасности...", className: "" },
+        { text: "[КРИТИЧНО] Обнаружена попытка несанкционированного доступа.", className: "critical" },
+        { text: "Целостность системы нарушена. Вход в аварийную оболочку.", className: "" },
+        { text: "Запуск протокола обхода блокировки.", className: "" }
       ];
 
       const TYPE_SPEED = 25;
@@ -1455,7 +1468,7 @@
       });
 
       function denyAccess() {
-        feedback.textContent = "ACCESS DENIED";
+        feedback.textContent = "ДОСТУП ЗАПРЕЩЁН";
         terminal.classList.remove("terminal-shake");
         void terminal.offsetWidth;
         terminal.classList.add("terminal-shake");
@@ -1499,7 +1512,7 @@
           boot.classList.add("is-fading");
           setTimeout(() => {
             boot.remove();
-            document.body.classList.add("ready"); // Включаем основной сайт
+            document.body.classList.add("ready");
           }, 950);
         }, 850);
       }
@@ -1528,7 +1541,7 @@
 
 
       // ============================================================
-      // JS ДЛЯ ОСНОВНОГО САЙТА (Твой оригинальный скрипт)
+      // JS ДЛЯ ОСНОВНОГО САЙТА
       // ============================================================
       const body = document.body;
       const dateOutput = document.getElementById('currentDate');
@@ -1638,11 +1651,11 @@
       function unlockArchive() {
         document.querySelectorAll('.section--redacted').forEach((section) => {
           const redaction = section.querySelector('.redaction');
-          redaction.outerHTML = `<div class="section__content unlocked-record"><div class="record"><h2 class="record__label">Emergency decryption</h2><p class="record__value">${unlockedContent[section.id]}</p></div></div>`;
+          redaction.outerHTML = `<div class="section__content unlocked-record"><div class="record"><h2 class="record__label">Аварийная дешифрация</h2><p class="record__value">${unlockedContent[section.id]}</p></div></div>`;
           section.classList.remove('section--redacted');
           section.classList.add('section--unlocked');
           section.dataset.redacted = 'false';
-          section.querySelector('.section__class').textContent = 'EMERGENCY ACCESS // THE SESSION IS BOOKED';
+          section.querySelector('.section__class').textContent = 'АВАРИЙНЫЙ ДОСТУП // СЕССИЯ ЗАЛОГИРОВАНА';
           section.querySelector('.section__toggle').setAttribute('aria-expanded', 'true');
         });
         document.querySelectorAll('.index-list .restricted').forEach((link) => link.classList.remove('restricted'));
@@ -1652,7 +1665,7 @@
         event.preventDefault();
         const code = passwordInput.value.trim().toUpperCase();
         breachLog.classList.add('active');
-        breachLog.textContent = '> TOKEN CHECK\n> APPEAL TO THE STORAGE FACILITY\n> DECRYPTION...';
+        breachLog.textContent = '> ПРОВЕРКА ТОКЕНА\n> ОБРАЩЕНИЕ К ХРАНИЛИЩУ\n> РАСШИФРОВКА...';
         passwordInput.disabled = true;
         passwordForm.querySelector('button').disabled = true;
         window.setTimeout(() => {
@@ -1666,7 +1679,7 @@
           } else {
             breachLog.textContent += '\n> ТОКЕН ОТКЛОНЕН\n> ИНЦИДЕНТ ЗАЛОГИРОВАН';
             formMessage.style.color = 'var(--red)';
-            formMessage.textContent = 'CODE REJECTED. ATTEMPT REGISTERED.';
+            formMessage.textContent = 'КОД ОТКЛОНЕН. ПОПЫТКА ЗАРЕГИСТРИРОВАНА.';
             beep(120, .18);
           }
           passwordInput.disabled = false;
@@ -1689,7 +1702,7 @@
       soundToggle.addEventListener('click', () => {
         soundEnabled = !soundEnabled;
         soundToggle.setAttribute('aria-pressed', String(soundEnabled));
-        soundToggle.textContent = `ЗВУК: ${soundEnabled ? 'ON' : 'OFF'}`;
+        soundToggle.textContent = `ЗВУК: ${soundEnabled ? 'ВКЛ' : 'ВЫКЛ'}`;
         if (soundEnabled) beep(720, .06);
       });
 
