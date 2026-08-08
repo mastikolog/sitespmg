@@ -37,7 +37,7 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* ===== КАСТОМНЫЙ СКРОЛЛБАР ===== */
+    /* ===== КАСТОМНЫЙ СКРОЛЛБАР (ПУНКТ 1) ===== */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -138,7 +138,7 @@
 
 
     /* ============================================================
-       ЗАГРУЗОЧНЫЙ ЭКРАН
+       ЗАГРУЗОЧНЫЙ ЭКРАН (НОВАЯ ВЕРСИЯ)
        ============================================================ */
     #boot {
       --bg: #05070a;
@@ -318,6 +318,7 @@
       color: var(--green);
     }
 
+    /* ===== ПОЛЕ ВВОДА С КУРСОРОМ ВНУТРИ ===== */
     .input-wrapper {
       display: inline-flex;
       align-items: center;
@@ -340,18 +341,19 @@
       caret-color: transparent;
     }
 
+    /* Зелёный мигающий прямоугольник (внутри поля) */
     .input-cursor {
-      display: none;
-      width: 0.65em;
-      height: 1.1em;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
-      animation: cursorBlink 0.6s steps(2, end) infinite;
-      vertical-align: text-bottom;
-      flex-shrink: 0;
-      margin-left: 0px;
-      transition: none;
-    }
+  display: none; /* ← ДОБАВЬ ЭТУ СТРОЧКУ */
+  width: 0.65em;
+  height: 1.1em;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
+  animation: cursorBlink 0.6s steps(2, end) infinite;
+  vertical-align: text-bottom;
+  flex-shrink: 0;
+  margin-left: 0px;
+  transition: none;
+}
 
     .input-cursor.hidden {
       display: none;
@@ -462,6 +464,7 @@
       pointer-events: none;
     }
 
+    /* CRT Animations */
     @keyframes bootNoise {
       0%   { transform: translate(0, 0); }
       25%  { transform: translate(2%, -1%); }
@@ -573,6 +576,7 @@
       text-shadow: 0 0 22px rgba(103, 245, 138, .28);
     }
 
+    /* ===== ПОСТОЯННЫЙ ГЛИТЧ-ЭФФЕКТ (БЕЗ НАВЕДЕНИЯ) ===== */
     .brand__title::before,
     .brand__title::after {
       position: absolute;
@@ -619,6 +623,7 @@
     .status::after { position: absolute; right: 0; bottom: -35px; width: max-content; padding: 6px 9px; content: "ВРЕМЯ РАБОТЫ: 8472 ЧАСА"; color: var(--cyan); border: 1px solid var(--line); background: var(--panel-solid); opacity: 0; transform: translateY(-5px); transition: var(--ease); pointer-events: none; }
     .status:hover::after, .status:focus::after { opacity: 1; transform: none; }
 
+    /* ===== МИГАЮЩИЙ ИНДИКАТОР СТАТУСА (на панели управления) ===== */
     .status-indicator {
       display: flex;
       align-items: center;
@@ -648,88 +653,6 @@
       background: var(--amber);
       box-shadow: 0 0 10px var(--amber);
       animation: pulse 1.3s ease infinite;
-    }
-
-    /* ===== НАВИГАЦИОННЫЕ ВКЛАДКИ ===== */
-    .nav-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      padding: 12px 16px;
-      margin: 10px 0 14px;
-      border: 1px solid var(--line);
-      background: rgba(8, 13, 21, 0.85);
-      backdrop-filter: blur(12px);
-      border-radius: 4px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-tab {
-      padding: 8px 16px;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .nav-tab:hover {
-      color: var(--green-hot);
-      border-color: rgba(0, 255, 65, 0.25);
-      background: rgba(0, 255, 65, 0.05);
-      text-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-    }
-
-    .nav-tab.active {
-      color: var(--green);
-      border-color: var(--line-strong);
-      background: rgba(0, 255, 65, 0.08);
-      text-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
-    }
-
-    .nav-tab.active:hover {
-      color: var(--green-hot);
-      border-color: var(--green-hot);
-      background: rgba(0, 255, 65, 0.12);
-      box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
-    }
-
-    /* ===== КОНТЕНТ ВКЛАДОК ===== */
-    #page-content {
-      margin-top: 20px;
-    }
-
-    .page-section {
-      display: none;
-      padding: 20px;
-      border: 1px solid var(--line);
-      background: rgba(8, 13, 21, 0.5);
-      border-radius: 4px;
-    }
-
-    .page-section.active {
-      display: block;
-    }
-
-    .page-title {
-      color: var(--cyan);
-      font-family: var(--display);
-      font-size: 1.8rem;
-      margin: 0 0 15px 0;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .page-text {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
     }
 
     .command-rail {
@@ -817,6 +740,7 @@
 
     .dossier { display: grid; gap: 12px; min-width: 0; }
 
+    /* ===== НЕОНОВАЯ ПОДСВЕТКА ПРИ НАВЕДЕНИИ НА РАЗДЕЛ (ПУНКТ 2) ===== */
     .section {
       content-visibility: auto;
       contain-intrinsic-size: 150px;
@@ -873,6 +797,7 @@
     .section__toggle[aria-expanded="true"] + .section__body { grid-template-rows: 1fr; border-top-width: 1px; }
     .section__content { padding: clamp(18px, 3vw, 30px); }
 
+    /* ===== УМЕНЬШЕННЫЙ ОТСТУП ДЛЯ ПУНКТОВ УСТАВА ===== */
     .record {
       display: grid;
       grid-template-columns: 70px minmax(0, 1fr);
@@ -934,6 +859,7 @@
     .redaction__line:nth-child(5) { width: 76%; }
     .redaction__code { position: absolute; right: 15px; bottom: 10px; color: rgba(255,92,92,.48); font-size: 9px; }
 
+    /* ===== ИСПРАВЛЕННЫЙ ОТСТУП ДЛЯ "Аварийная дешифрация" (ПУНКТ 8) ===== */
     .section--unlocked { border-color: rgba(226,182,61,.4); }
     .section--unlocked .section__number, .section--unlocked .section__title { color: var(--amber); }
     .unlocked-record { color: #b6a883; }
@@ -961,6 +887,7 @@
     .footer strong { color: var(--red); }
     .level-badge { display: inline-grid; place-items: center; min-width: 82px; padding: 6px 10px; color: var(--red); border: 1px solid var(--danger-line); }
 
+    /* ===== ЛОГ ДЕЙСТВИЙ ВНИЗУ СТРАНИЦЫ ===== */
     .action-log {
       margin-top: 20px;
       padding: 12px 16px;
@@ -1025,6 +952,7 @@
     .breach-log { display: none; margin: 20px 0 0; padding: 14px; color: var(--green); border-left: 2px solid var(--green); background: #060a10; font-size: 10px; white-space: pre-line; }
     .breach-log.active { display: block; }
 
+    /* ===== ТЁМНАЯ ТЕМА (УЛУЧШЕННАЯ) ===== */
     body.high-contrast {
       --ink: #000000;
       --ink-elevated: #050505;
@@ -1037,6 +965,7 @@
       --line: rgba(0,255,65,.5);
     }
 
+    /* ===== АНИМАЦИЯ ПАДАЮЩЕГО КОДА (MATRIX) ===== */
     .matrix-rain {
       position: fixed;
       top: 0;
@@ -1061,6 +990,9 @@
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0.2; }
     }
 
+    /* ============================================================
+       ОБЩИЕ АНИМАЦИИ
+       ============================================================ */
     @keyframes pulse { 50% { opacity: .3; transform: scale(.72); } }
     @keyframes gridDrift { to { background-position: 42px 42px; } }
     @keyframes headerScan { to { transform: translateY(240%); } }
@@ -1077,6 +1009,9 @@
       50%, 70% { opacity: .5; clip-path: inset(5% 0 75%); }
     }
 
+    /* ============================================================
+       МЕДИА-ЗАПРОСЫ
+       ============================================================ */
     @media (max-width: 1024px) {
       .archive-layout { grid-template-columns: 220px minmax(0, 1fr); }
       .metric-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1093,19 +1028,6 @@
       .brand__title { font-size: clamp(2.45rem, 15vw, 4.6rem); line-height: .82; }
       .meta { min-width: 0; }
       .meta__row { grid-template-columns: 80px 1fr; }
-      .nav-tabs {
-        gap: 3px;
-        padding: 8px 10px;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        scrollbar-width: thin;
-      }
-      .nav-tab {
-        padding: 6px 12px;
-        font-size: 9px;
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
       .command-rail { position: relative; top: auto; grid-template-columns: 1fr 1fr; gap: 4px; }
       .search-wrap { grid-column: 1 / -1; }
       .control { padding-inline: 6px; font-size: 8px; min-height: 32px; }
@@ -1152,8 +1074,12 @@
   <a class="skip-link" href="#archive">Перейти к архиву</a>
   <div class="noise" aria-hidden="true"></div>
 
+  <!-- ===== МАТРИЦА (ФОН) ===== -->
   <div class="matrix-rain" id="matrixRain" aria-hidden="true"></div>
 
+  <!-- ============================================================
+       ЗАГРУЗОЧНЫЙ ЭКРАН
+       ============================================================ -->
   <div id="boot" aria-label="SPMG system boot screen">
     <div class="boot-vignette"></div>
     <div id="glitchLine" class="glitch-line"></div>
@@ -1195,7 +1121,11 @@
     </section>
   </div>
 
+  <!-- ============================================================
+       ОСНОВНОЙ САЙТ
+       ============================================================ -->
   <div class="shell">
+    <!-- ШАПКА САЙТА -->
     <header class="masthead">
       <div class="brand">
         <p class="brand__kicker">ИНФОРМАЦИОННЫЙ МАТЕРИАЛ | ВЕРСИЯ 1.0 </p>
@@ -1210,67 +1140,7 @@
       </dl>
     </header>
 
-    <!-- ===== НАВИГАЦИОННЫЕ ВКЛАДКИ ===== -->
-    <nav class="nav-tabs" aria-label="Навигация по разделам">
-      <a href="#main" class="nav-tab active">Главная страница</a>
-      <a href="#rules" class="nav-tab">Правила Отдела СПМГ</a>
-      <a href="#events" class="nav-tab">Мероприятия</a>
-      <a href="#discord" class="nav-tab">Правила Дискорд Сервера</a>
-      <a href="#norm" class="nav-tab">Норма</a>
-      <a href="#punishments" class="nav-tab">Наказания</a>
-      <a href="#vacations" class="nav-tab">Отпуска</a>
-      <a href="#history" class="nav-tab">История Кураторов</a>
-      <a href="#additional" class="nav-tab">Дополнительно</a>
-    </nav>
-
-    <!-- ===== КОНТЕНТ ВКЛАДОК ===== -->
-    <div id="page-content">
-      <section id="main" class="page-section active">
-        <h2 class="page-title">Главная страница</h2>
-        <p class="page-text">СЮДА ВСТАВЬ СВОЙ ТЕКСТ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ</p>
-      </section>
-      
-      <section id="rules" class="page-section">
-        <h2 class="page-title">Правила Отдела СПМГ</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ТЕКСТ ПРАВИЛ ОТДЕЛА</p>
-      </section>
-      
-      <section id="events" class="page-section">
-        <h2 class="page-title">Мероприятия</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ТЕКСТ О МЕРОПРИЯТИЯХ</p>
-      </section>
-      
-      <section id="discord" class="page-section">
-        <h2 class="page-title">Правила Дискорд Сервера</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ПРАВИЛА ДИСКОРД СЕРВЕРА</p>
-      </section>
-      
-      <section id="norm" class="page-section">
-        <h2 class="page-title">Норма</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ТЕКСТ О НОРМЕ</p>
-      </section>
-      
-      <section id="punishments" class="page-section">
-        <h2 class="page-title">Наказания</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ТЕКСТ О НАКАЗАНИЯХ</p>
-      </section>
-      
-      <section id="vacations" class="page-section">
-        <h2 class="page-title">Отпуска</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ТЕКСТ ОБ ОТПУСКАХ</p>
-      </section>
-      
-      <section id="history" class="page-section">
-        <h2 class="page-title">История Кураторов</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ТЕКСТ ОБ ИСТОРИИ КУРАТОРОВ</p>
-      </section>
-      
-      <section id="additional" class="page-section">
-        <h2 class="page-title">Дополнительно</h2>
-        <p class="page-text">СЮДА ВСТАВЬ ДОПОЛНИТЕЛЬНУЮ ИНФОРМАЦИЮ</p>
-      </section>
-    </div>
-
+    <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
     <nav class="command-rail" aria-label="Инструменты">
       <label class="search-wrap">
         <span class="sr-only" hidden>ПОИСК</span>
@@ -1292,6 +1162,7 @@
     </div>
 
     <main class="archive-layout" id="archive">
+      <!-- БОКОВОЕ МЕНЮ -->
       <aside class="index-panel" aria-label="Навигация по разделам">
         <p class="index-panel__label">РЕЕСТР УСТАВА</p>
         <ol class="index-list" id="indexList">
@@ -1315,7 +1186,10 @@
         </div>
       </aside>
 
+      <!-- ОСНОВНОЕ СОДЕРЖАНИЕ -->
       <div class="dossier" id="dossier">
+
+        <!-- РАЗДЕЛ 1 — Общие положения -->
         <article class="section" id="section-1" data-search="общие положения">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-1">
             <span class="section__number">01</span>
@@ -1352,6 +1226,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 2 — Права и обязанности -->
         <article class="section" id="section-2" data-search="права обязанности">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-2">
             <span class="section__number">02</span>
@@ -1376,6 +1251,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 3 — Структура отдела -->
         <article class="section" id="section-3" data-search="структура">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-3">
             <span class="section__number">03</span>
@@ -1408,6 +1284,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 4 — Порядок действий -->
         <article class="section" id="section-4" data-search="порядок действий">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-4">
             <span class="section__number">04</span>
@@ -1432,6 +1309,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 5 — Секретный -->
         <article class="section section--redacted" id="section-5" data-redacted="true" data-search="секретный раздел 5">
           <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-5">
             <span class="section__number">05</span>
@@ -1457,6 +1335,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 6 — Секретный -->
         <article class="section section--redacted" id="section-6" data-redacted="true" data-search="секретный раздел 6">
           <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-6">
             <span class="section__number">06</span>
@@ -1482,6 +1361,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 7 — Секретный -->
         <article class="section section--redacted" id="section-7" data-redacted="true" data-search="секретный раздел 7">
           <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-7">
             <span class="section__number">07</span>
@@ -1507,6 +1387,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 8 — Дополнительно -->
         <article class="section" id="section-8" data-search="дополнительно">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-8">
             <span class="section__number">08</span>
@@ -1527,6 +1408,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 9 — Примечания -->
         <article class="section" id="section-9" data-search="примечания">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-9">
             <span class="section__number">09</span>
@@ -1547,6 +1429,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 10 — Архивация -->
         <article class="section" id="section-10" data-search="архивация">
           <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-10">
             <span class="section__number">10</span>
@@ -1567,6 +1450,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 11 — Секретный -->
         <article class="section section--redacted" id="section-11" data-redacted="true" data-search="секретный раздел 11">
           <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-11">
             <span class="section__number">11</span>
@@ -1592,6 +1476,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 12 — Секретный -->
         <article class="section section--redacted" id="section-12" data-redacted="true" data-search="секретный раздел 12">
           <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-12">
             <span class="section__number">12</span>
@@ -1617,6 +1502,7 @@
           </div>
         </article>
 
+        <!-- РАЗДЕЛ 13 — Секретный -->
         <article class="section section--redacted" id="section-13" data-redacted="true" data-search="секретный раздел 13">
           <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-13">
             <span class="section__number">13</span>
@@ -1641,24 +1527,29 @@
             </div>
           </div>
         </article>
-      </div>
+
+      </div> <!-- конец .dossier -->
     </main>
 
+    <!-- ПРЕДУПРЕЖДЕНИЕ ВНИЗУ -->
     <section class="restriction" aria-label="Предупреждение об ограничении доступа">
       <h2 class="restriction__title">Доступ ограничен</h2>
       <p>Вы просматриваете сокращённую копию документа с уровнем допуска 1. Для получения полного доступа требуется авторизация.</p>
     </section>
 
+    <!-- ПОДВАЛ -->
     <footer class="footer">
       <span><strong>УВЕДОМЛЕНИЕ:</strong> ТОЛЬКО ДЛЯ СОТРУДНИКОВ SPMG</span>
       <span class="level-badge">УРОВЕНЬ 1</span>
     </footer>
 
+    <!-- ===== ЛОГ ДЕЙСТВИЙ ===== -->
     <div class="action-log" id="actionLog">
       <div class="action-log-entry"><span class="time">[СИСТЕМА]</span> <span class="action success">СЕССИЯ ЗАПУЩЕНА</span></div>
     </div>
   </div>
 
+  <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВВОДА ПАРОЛЯ -->
   <dialog class="modal" id="accessModal" aria-labelledby="modalTitle">
     <div class="modal__header">
       <span>ЗАПРОС ДОСТУПА | SPMG-403</span>
@@ -1676,6 +1567,7 @@
     </div>
   </dialog>
 
+  <!-- ===== КНОПКА "НАВЕРХ" (ПУНКТ 6) ===== -->
   <button id="scrollTopBtn" style="
     position: fixed;
     bottom: 30px;
@@ -1925,6 +1817,7 @@
           setTimeout(() => {
             boot.remove();
             document.body.classList.add("ready");
+            // запускаем матрицу после загрузки
             initMatrixRain();
           }, 950);
         }, 850);
@@ -1952,6 +1845,10 @@
 
       runBootSequence();
 
+
+      // ============================================================
+      // МАТРИЦА (АНИМАЦИЯ ПАДАЮЩЕГО КОДА)
+      // ============================================================
       function initMatrixRain() {
         const container = document.getElementById('matrixRain');
         if (!container) return;
@@ -1968,6 +1865,7 @@
           container.appendChild(span);
         }
       }
+
 
       // ============================================================
       // JS ДЛЯ ОСНОВНОГО САЙТА
@@ -1990,27 +1888,7 @@
       let audioContext2 = null;
       let soundEnabled2 = false;
 
-      // ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
-      const tabs = document.querySelectorAll('.nav-tab');
-      const pageSections = document.querySelectorAll('.page-section');
-
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', (e) => {
-          e.preventDefault();
-
-          tabs.forEach((t) => t.classList.remove('active'));
-          tab.classList.add('active');
-
-          const targetId = tab.getAttribute('href').replace('#', '');
-          pageSections.forEach((section) => {
-            section.classList.toggle('active', section.id === targetId);
-          });
-
-          beep(480, 0.025);
-          addLog(`ПЕРЕХОД НА ВКЛАДКУ: ${tab.textContent.trim()}`, '');
-        });
-      });
-
+      // ===== ФУНКЦИЯ ДЛЯ ЛОГА ДЕЙСТВИЙ =====
       function addLog(message, type = '') {
         const entry = document.createElement('div');
         entry.className = 'action-log-entry';
@@ -2018,6 +1896,7 @@
         entry.innerHTML = `<span class="time">[${time}]</span> <span class="action ${type}">${message}</span>`;
         actionLog.appendChild(entry);
         actionLog.scrollTop = actionLog.scrollHeight;
+        // Ограничиваем количество записей
         while (actionLog.children.length > 50) {
           actionLog.removeChild(actionLog.firstChild);
         }
@@ -2088,6 +1967,7 @@
       }, { rootMargin: '-25% 0px -68%', threshold: 0 });
       sections.forEach((section) => navObserver.observe(section));
 
+      // ===== КЛИКИ ПО НАВИГАЦИИ (ЛОГ) =====
       navLinks.forEach((link) => {
         link.addEventListener('click', () => {
           const sectionNum = link.dataset.section || '';
@@ -2224,6 +2104,7 @@
         if (!event.shiftKey) event.preventDefault();
       });
 
+      // ===== КНОПКА "НАВЕРХ" (ПУНКТ 6) =====
       const scrollBtn = document.getElementById('scrollTopBtn');
       if (scrollBtn) {
         window.addEventListener('scroll', () => {
@@ -2240,6 +2121,7 @@
         });
       }
 
+      // Добавляем авто-лог (случайные технические сообщения)
       setInterval(() => {
         const techMessages = [
           'СИНХРОНИЗАЦИЯ ДАННЫХ...',
@@ -2256,6 +2138,7 @@
       updateDate();
       window.setInterval(updateDate, 60 * 60 * 1000);
 
+      // Добавляем начальный лог
       setTimeout(() => {
         addLog('СИСТЕМА ЗАГРУЖЕНА. ДОБРО ПОЖАЛОВАТЬ.', 'success');
       }, 500);
