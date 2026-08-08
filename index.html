@@ -343,17 +343,17 @@
 
     /* Зелёный мигающий прямоугольник (внутри поля) */
     .input-cursor {
-      display: inline-block;
-      width: 0.65em;
-      height: 1.1em;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
-      animation: cursorBlink 0.6s steps(2, end) infinite;
-      vertical-align: text-bottom;
-      flex-shrink: 0;
-      margin-left: 0px;
-      transition: none;
-    }
+  display: none; /* ← ДОБАВЬ ЭТУ СТРОЧКУ */
+  width: 0.65em;
+  height: 1.1em;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
+  animation: cursorBlink 0.6s steps(2, end) infinite;
+  vertical-align: text-bottom;
+  flex-shrink: 0;
+  margin-left: 0px;
+  transition: none;
+}
 
     .input-cursor.hidden {
       display: none;
@@ -1100,6 +1100,7 @@
           <span class="prompt-label">КЛЮЧ ДОСТУПА:</span>
           <span class="input-wrapper">
             <input id="accessKey" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ключ доступа" maxlength="32" />
+            <span class="input-cursor" id="inputCursor"></span>
           </span>
         </div>
 
