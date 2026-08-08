@@ -743,7 +743,7 @@
     /* ===== НЕОНОВАЯ ПОДСВЕТКА ПРИ НАВЕДЕНИИ НА РАЗДЕЛ (ПУНКТ 2) ===== */
     .section {
       content-visibility: auto;
-      contain-intrinsic-size: 420px;
+      contain-intrinsic-size: 150px;
       overflow: clip;
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(15, 25, 37, .93), rgba(8, 14, 22, .97));
@@ -1156,7 +1156,7 @@
     </nav>
 
     <div class="auth-banner" role="status">
-      <span>[УД - 1] [] УЧЁТНЫЕ ДАННЫЕ ПОТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+      <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
       <span class="auth-banner__line" aria-hidden="true"></span>
       <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
     </div>
@@ -1611,8 +1611,8 @@
         { text: "Ожидание ввода ключа доступа.", className: "success" }
       ];
 
-      const TYPE_SPEED = 12;
-      const LINE_DELAY = 100;
+      const TYPE_SPEED = 30;
+      const LINE_DELAY = 250;
       const GLITCH_SYMBOLS = "@#$%&?!";
 
       const boot = document.getElementById("boot");
@@ -2024,7 +2024,7 @@
           section.classList.remove('section--redacted');
           section.classList.add('section--unlocked');
           section.dataset.redacted = 'false';
-          section.querySelector('.section__class').textContent = 'АВАРИЙНЫЙ ДОСТУП [] СЕССИЯ ЗАЛОГИРОВАНА';
+          section.querySelector('.section__class').textContent = 'АВАРИЙНЫЙ ДОСТУП | СЕССИЯ ЗАЛОГИРОВАНА';
           section.querySelector('.section__toggle').setAttribute('aria-expanded', 'true');
           const num = section.id.replace('section-', '');
           const title = section.querySelector('.section__title')?.textContent || '';
