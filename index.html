@@ -2293,6 +2293,25 @@
       max-width: 100%;
       width: 100%;
     }
+    /* ===== ОГРАНИЧЕНИЕ ДЛЯ ПАНЕЛИ УПРАВЛЕНИЯ И БАННЕРА ===== */
+.page .command-rail,
+.page .auth-banner {
+  max-width: 1380px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Для мобильных */
+@media (max-width: 767px) {
+  .page .command-rail,
+  .page .auth-banner {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+    
   </style>
 </head>
 <body>
