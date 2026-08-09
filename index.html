@@ -2261,6 +2261,38 @@
     padding: 6px 10px;
   }
 }
+        /* ============================================================
+       ОГРАНИЧЕНИЕ ШИРИНЫ ДЛЯ СТРАНИЦ (ИСПРАВЛЕНИЕ)
+       ============================================================ */
+    .page .page-content {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    /* Для больших экранов */
+    @media (min-width: 768px) {
+      .page .page-content {
+        max-width: 1380px;
+        padding: 0 20px;
+      }
+    }
+
+    /* Чтобы блоки не растягивались */
+    #page-punishments .section-block,
+    #page-vacations .section-block,
+    #page-history .section-block,
+    #page-additional .section-block,
+    #page-patrol .section-block,
+    #page-training .section-block,
+    #page-events .section-block,
+    #page-cordon .section-block,
+    #page-rules .section-block,
+    #page-norm .section-block {
+      max-width: 100%;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
