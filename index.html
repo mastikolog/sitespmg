@@ -224,14 +224,21 @@
         );
     }
 
-    .terminal-body {
-  position: relative;
-  height: calc(100% - 48px);
-  overflow: hidden;
-  font-size: clamp(12px, 1.35vw, 15px);
-  line-height: 1.65;
-  letter-spacing: 0.025em;
-}
+    .boot-terminal {
+      position: relative;
+      width: min(900px, 88vw);
+      max-width: 100%;
+      height: min(570px, 76vh);
+      min-height: 390px;
+      box-sizing: border-box;
+      padding: 30px 34px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(16, 23, 28, 0.96), rgba(5, 8, 11, 0.98));
+      border: 1px solid var(--border);
+      box-shadow: inset 0 0 0 1px rgba(130, 160, 150, 0.035), inset 0 0 45px rgba(0, 0, 0, 0.95), inset 0 0 120px rgba(0, 0, 0, 0.72), 0 0 45px rgba(0, 0, 0, 0.95);
+      text-shadow: 0 0 4px rgba(117, 255, 154, 0.7), 0 0 12px rgba(117, 255, 154, 0.2);
+      animation: terminalFlicker 7s infinite;
+    }
 
     .terminal-header {
       display: flex;
@@ -262,16 +269,13 @@
     }
 
     .terminal-body {
-  position: relative;
-  height: calc(100% - 40px);
-  overflow: hidden;
-  font-size: clamp(11px, 1.2vw, 14px);
-  line-height: 1.4;
-  letter-spacing: 0.025em;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+      position: relative;
+      height: calc(100% - 48px);
+      overflow: hidden;
+      font-size: clamp(12px, 1.35vw, 15px);
+      line-height: 1.65;
+      letter-spacing: 0.025em;
+    }
 
     .boot-log {
       white-space: pre-wrap;
@@ -296,18 +300,17 @@
       text-shadow: 0 0 5px rgba(117, 255, 154, 0.6);
     }
 
-   .boot-prompt {
-  display: none;
-  margin-top: 8px;
-  color: var(--green);
-}
+    .boot-prompt {
+      display: none;
+      margin-top: 18px;
+      color: var(--green);
+    }
 
-.boot-prompt.visible {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+    .boot-prompt.visible {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
     .prompt-label {
       flex: 0 0 auto;
@@ -379,14 +382,12 @@
       text-shadow: 0 0 5px rgba(255, 51, 77, 0.5);
     }
 
-   .boot-progress-wrap {
-  display: none;
-  margin-top: 4px;
-}
+    .boot-progress-wrap {
+      display: none;
+      margin-top: 22px;
+    }
 
-.boot-progress-wrap.visible {
-  display: block;
-}
+    .boot-progress-wrap.visible { display: block; }
 
     .decrypt-text {
       margin-bottom: 9px;
@@ -2614,7 +2615,7 @@
       </div>
     </div>
 
-        <!-- ============================================================
+       <!-- ============================================================
      СТРАНИЦА: НОРМА
      ============================================================ -->
 <div id="page-norm" class="page">
@@ -2842,8 +2843,8 @@
         { text: "Ожидание ввода ключа доступа.", className: "success" }
       ];
 
-      const TYPE_SPEED = 8;
-const LINE_DELAY = 60;
+      const TYPE_SPEED = 30;
+      const LINE_DELAY = 250;
       const GLITCH_SYMBOLS = "@#$%&?!";
 
       const boot = document.getElementById("boot");
