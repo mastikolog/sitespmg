@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ============================================================
-       ВЕСЬ CSS (ПОЛНАЯ ВЕРСИЯ — НИЧЕГО НЕ УДАЛЯТЬ)
+       ВЕСЬ CSS (ПОЛНАЯ ВЕРСИЯ)
        ============================================================ */
     :root {
       color-scheme: dark;
@@ -37,7 +37,6 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* ===== КАСТОМНЫЙ СКРОЛЛБАР (ПУНКТ 1) ===== */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -138,7 +137,7 @@
 
 
     /* ============================================================
-       ЗАГРУЗОЧНЫЙ ЭКРАН (НОВАЯ ВЕРСИЯ)
+       ЗАГРУЗОЧНЫЙ ЭКРАН
        ============================================================ */
     #boot {
       --bg: #05070a;
@@ -226,19 +225,20 @@
     }
 
     .boot-terminal {
-      position: relative;
-      width: min(900px, 88vw);
-      height: min(570px, 76vh);
-      min-height: 390px;
-      box-sizing: border-box;
-      padding: 30px 34px;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(16, 23, 28, 0.96), rgba(5, 8, 11, 0.98));
-      border: 1px solid var(--border);
-      box-shadow: inset 0 0 0 1px rgba(130, 160, 150, 0.035), inset 0 0 45px rgba(0, 0, 0, 0.95), inset 0 0 120px rgba(0, 0, 0, 0.72), 0 0 45px rgba(0, 0, 0, 0.95);
-      text-shadow: 0 0 4px rgba(117, 255, 154, 0.7), 0 0 12px rgba(117, 255, 154, 0.2);
-      animation: terminalFlicker 7s infinite;
-    }
+  position: relative;
+  width: min(900px, 88vw);
+  max-width: 100%;
+  height: min(570px, 76vh);
+  min-height: 390px;
+  box-sizing: border-box;
+  padding: 30px 34px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(16, 23, 28, 0.96), rgba(5, 8, 11, 0.98));
+  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px rgba(130, 160, 150, 0.035), inset 0 0 45px rgba(0, 0, 0, 0.95), inset 0 0 120px rgba(0, 0, 0, 0.72), 0 0 45px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 0 4px rgba(117, 255, 154, 0.7), 0 0 12px rgba(117, 255, 154, 0.2);
+  animation: terminalFlicker 7s infinite;
+}
 
     .terminal-header {
       display: flex;
@@ -318,7 +318,6 @@
       color: var(--green);
     }
 
-    /* ===== ПОЛЕ ВВОДА С КУРСОРОМ ВНУТРИ ===== */
     .input-wrapper {
       display: inline-flex;
       align-items: center;
@@ -341,19 +340,18 @@
       caret-color: transparent;
     }
 
-    /* Зелёный мигающий прямоугольник (внутри поля) */
     .input-cursor {
-  display: none; /* ← ДОБАВЬ ЭТУ СТРОЧКУ */
-  width: 0.65em;
-  height: 1.1em;
-  background: var(--green);
-  box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
-  animation: cursorBlink 0.6s steps(2, end) infinite;
-  vertical-align: text-bottom;
-  flex-shrink: 0;
-  margin-left: 0px;
-  transition: none;
-}
+      display: none;
+      width: 0.65em;
+      height: 1.1em;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(117, 255, 154, 0.9), 0 0 20px rgba(117, 255, 154, 0.3);
+      animation: cursorBlink 0.6s steps(2, end) infinite;
+      vertical-align: text-bottom;
+      flex-shrink: 0;
+      margin-left: 0px;
+      transition: none;
+    }
 
     .input-cursor.hidden {
       display: none;
@@ -464,7 +462,6 @@
       pointer-events: none;
     }
 
-    /* CRT Animations */
     @keyframes bootNoise {
       0%   { transform: translate(0, 0); }
       25%  { transform: translate(2%, -1%); }
@@ -576,7 +573,6 @@
       text-shadow: 0 0 22px rgba(103, 245, 138, .28);
     }
 
-    /* ===== ПОСТОЯННЫЙ ГЛИТЧ-ЭФФЕКТ (БЕЗ НАВЕДЕНИЯ) ===== */
     .brand__title::before,
     .brand__title::after {
       position: absolute;
@@ -623,7 +619,6 @@
     .status::after { position: absolute; right: 0; bottom: -35px; width: max-content; padding: 6px 9px; content: "ВРЕМЯ РАБОТЫ: 8472 ЧАСА"; color: var(--cyan); border: 1px solid var(--line); background: var(--panel-solid); opacity: 0; transform: translateY(-5px); transition: var(--ease); pointer-events: none; }
     .status:hover::after, .status:focus::after { opacity: 1; transform: none; }
 
-    /* ===== МИГАЮЩИЙ ИНДИКАТОР СТАТУСА (на панели управления) ===== */
     .status-indicator {
       display: flex;
       align-items: center;
@@ -655,6 +650,74 @@
       animation: pulse 1.3s ease infinite;
     }
 
+    /* ===== НАВИГАЦИОННЫЕ ВКЛАДКИ ===== */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 12px 16px;
+      margin: 10px 0 14px;
+      border: 1px solid var(--line);
+      background: rgba(8, 13, 21, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 4px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-tab {
+      flex: 1 1 auto;
+      padding: 8px 16px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: transparent;
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .nav-tab:hover {
+      color: var(--green-hot);
+      border-color: rgba(0, 255, 65, 0.25);
+      background: rgba(0, 255, 65, 0.05);
+      text-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    }
+
+    .nav-tab.active {
+      color: var(--green);
+      border-color: var(--line-strong);
+      background: rgba(0, 255, 65, 0.08);
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
+    }
+
+    .nav-tab.active:hover {
+      color: var(--green-hot);
+      border-color: var(--green-hot);
+      background: rgba(0, 255, 65, 0.12);
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+    }
+
+    /* ===== СТРАНИЦЫ ===== */
+    .page {
+      display: none;
+      animation: pageFade 0.4s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageFade {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     .command-rail {
       position: sticky;
       top: 10px;
@@ -670,8 +733,21 @@
       box-shadow: 0 10px 40px rgba(0,0,0,.25);
       align-items: center;
     }
-    .search-wrap { position: relative; display: flex; align-items: center; min-width: 0; }
-    .search-wrap::before { position: absolute; left: 12px; content: ">"; color: var(--cyan); }
+
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .search-wrap::before {
+      position: absolute;
+      left: 12px;
+      content: ">";
+      color: var(--cyan);
+    }
+
     .search {
       width: 100%;
       min-height: 40px;
@@ -682,8 +758,15 @@
       outline: 1px solid transparent;
       transition: var(--ease);
     }
-    .search:focus { outline-color: var(--line-strong); background: rgba(103, 245, 138, .075); }
-    .search::placeholder { color: var(--faint); }
+
+    .search:focus {
+      outline-color: var(--line-strong);
+      background: rgba(103, 245, 138, .075);
+    }
+
+    .search::placeholder {
+      color: var(--faint);
+    }
 
     .control {
       min-height: 40px;
@@ -697,9 +780,22 @@
       font-size: 10px;
       white-space: nowrap;
     }
-    .control:hover { color: var(--ink); border-color: var(--green); background: var(--green); }
-    .control:active { transform: translateY(1px); }
-    .control[aria-pressed="true"] { color: var(--ink); background: var(--cyan); border-color: var(--cyan); }
+
+    .control:hover {
+      color: var(--ink);
+      border-color: var(--green);
+      background: var(--green);
+    }
+
+    .control:active {
+      transform: translateY(1px);
+    }
+
+    .control[aria-pressed="true"] {
+      color: var(--ink);
+      background: var(--cyan);
+      border-color: var(--cyan);
+    }
 
     .auth-banner {
       display: grid;
@@ -715,11 +811,32 @@
       letter-spacing: .11em;
       text-transform: uppercase;
     }
-    .auth-banner__code { color: var(--muted); }
-    .auth-banner__line { height: 1px; overflow: hidden; background: rgba(134, 231, 234, .15); }
-    .auth-banner__line::after { display: block; width: 38%; height: 100%; content: ""; background: var(--cyan); animation: dataRun 2.2s ease-in-out infinite; }
 
-    .archive-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .auth-banner__code {
+      color: var(--muted);
+    }
+
+    .auth-banner__line {
+      height: 1px;
+      overflow: hidden;
+      background: rgba(134, 231, 234, .15);
+    }
+
+    .auth-banner__line::after {
+      display: block;
+      width: 38%;
+      height: 100%;
+      content: "";
+      background: var(--cyan);
+      animation: dataRun 2.2s ease-in-out infinite;
+    }
+
+    .archive-layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
 
     .index-panel {
       position: sticky;
@@ -728,19 +845,74 @@
       border: 1px solid var(--line);
       background: var(--panel);
     }
-    .index-panel__label { margin: 0 0 15px; color: var(--muted); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; }
-    .index-list { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
-    .index-list a { display: grid; grid-template-columns: 26px 1fr; gap: 8px; padding: 7px 6px; color: var(--faint); text-decoration: none; border-left: 1px solid transparent; font-size: 10px; line-height: 1.35; transition: var(--ease); }
-    .index-list a:hover, .index-list a.active { color: var(--green); border-left-color: var(--green); background: rgba(103,245,138,.05); }
-    .index-list a.restricted { color: rgba(255,92,92,.58); }
 
-    .clearance-card { margin-top: 18px; padding: 14px; border: 1px solid var(--danger-line); background: repeating-linear-gradient(-45deg, rgba(255,92,92,.035) 0 6px, transparent 6px 12px); }
-    .clearance-card strong { display: block; color: var(--red); font-family: var(--display); font-size: 1.8rem; line-height: 1; }
-    .clearance-card span { color: var(--muted); font-size: 9px; letter-spacing: .1em; }
+    .index-panel__label {
+      margin: 0 0 15px;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
 
-    .dossier { display: grid; gap: 12px; min-width: 0; }
+    .index-list {
+      display: grid;
+      gap: 2px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-    /* ===== НЕОНОВАЯ ПОДСВЕТКА ПРИ НАВЕДЕНИИ НА РАЗДЕЛ (ПУНКТ 2) ===== */
+    .index-list a {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 8px;
+      padding: 7px 6px;
+      color: var(--faint);
+      text-decoration: none;
+      border-left: 1px solid transparent;
+      font-size: 10px;
+      line-height: 1.35;
+      transition: var(--ease);
+    }
+
+    .index-list a:hover,
+    .index-list a.active {
+      color: var(--green);
+      border-left-color: var(--green);
+      background: rgba(103, 245, 138, .05);
+    }
+
+    .index-list a.restricted {
+      color: rgba(255, 92, 92, .58);
+    }
+
+    .clearance-card {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid var(--danger-line);
+      background: repeating-linear-gradient(-45deg, rgba(255, 92, 92, .035) 0 6px, transparent 6px 12px);
+    }
+
+    .clearance-card strong {
+      display: block;
+      color: var(--red);
+      font-family: var(--display);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .clearance-card span {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .1em;
+    }
+
+    .dossier {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
     .section {
       content-visibility: auto;
       contain-intrinsic-size: 150px;
@@ -751,21 +923,35 @@
       transform: translateY(18px);
       transition: opacity 500ms ease, transform 500ms ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .section.in-view { opacity: 1; transform: none; }
+
+    .section.in-view {
+      opacity: 1;
+      transform: none;
+    }
+
     .section:hover {
       border-color: rgba(0, 255, 65, 0.35);
       box-shadow: 0 0 8px rgba(0, 255, 65, 0.08), inset 0 0 8px rgba(0, 255, 65, 0.02);
     }
+
     .section:hover .section__title {
       color: var(--green-hot);
       text-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
     }
+
     .section:hover .section__number {
       color: var(--green-hot);
       text-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
     }
-    .section.is-match { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(134,231,234,.2); }
-    .section.is-hidden-by-search { display: none; }
+
+    .section.is-match {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 1px rgba(134, 231, 234, .2);
+    }
+
+    .section.is-hidden-by-search {
+      display: none;
+    }
 
     .section__toggle {
       position: relative;
@@ -781,33 +967,87 @@
       background: transparent;
       cursor: pointer;
     }
-    .section__toggle::after { content: "+"; color: var(--muted); font-size: 22px; text-align: center; transition: transform var(--ease), color var(--ease); }
-    .section__toggle[aria-expanded="true"]::after { color: var(--green); transform: rotate(45deg); }
-    .section__number { color: var(--cyan); font-family: var(--display); font-size: 2rem; font-weight: 700; line-height: 1; }
-    .section__title { display: block; color: #a9f3b8; font-family: var(--display); font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 600; line-height: 1.1; letter-spacing: .07em; text-transform: uppercase; }
-    .section__class { display: block; margin-top: 5px; color: var(--faint); font-size: 8px; letter-spacing: .16em; text-transform: uppercase; }
+
+    .section__toggle::after {
+      content: "+";
+      color: var(--muted);
+      font-size: 22px;
+      text-align: center;
+      transition: transform var(--ease), color var(--ease);
+    }
+
+    .section__toggle[aria-expanded="true"]::after {
+      color: var(--green);
+      transform: rotate(45deg);
+    }
+
+    .section__number {
+      color: var(--cyan);
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .section__title {
+      display: block;
+      color: #a9f3b8;
+      font-family: var(--display);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .section__class {
+      display: block;
+      margin-top: 5px;
+      color: var(--faint);
+      font-size: 8px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
 
     .section__body {
       display: grid;
       grid-template-rows: 0fr;
       border-top: 0 solid var(--line);
-      transition: grid-template-rows 420ms cubic-bezier(.2,.8,.2,1), border-width var(--ease);
+      transition: grid-template-rows 420ms cubic-bezier(.2, .8, .2, 1), border-width var(--ease);
     }
-    .section__body > div { min-height: 0; overflow: hidden; }
-    .section__toggle[aria-expanded="true"] + .section__body { grid-template-rows: 1fr; border-top-width: 1px; }
-    .section__content { padding: clamp(18px, 3vw, 30px); }
 
-    /* ===== УМЕНЬШЕННЫЙ ОТСТУП ДЛЯ ПУНКТОВ УСТАВА ===== */
+    .section__body>div {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .section__toggle[aria-expanded="true"]+.section__body {
+      grid-template-rows: 1fr;
+      border-top-width: 1px;
+    }
+
+    .section__content {
+      padding: clamp(18px, 3vw, 30px);
+    }
+
     .record {
       display: grid;
       grid-template-columns: 70px minmax(0, 1fr);
       gap: 12px;
       padding: 15px 0;
-      border-bottom: 1px solid rgba(103,245,138,.1);
+      border-bottom: 1px solid rgba(103, 245, 138, .1);
       text-align: left;
     }
-    .record:first-child { padding-top: 0; }
-    .record:last-child { padding-bottom: 0; border-bottom: 0; }
+
+    .record:first-child {
+      padding-top: 0;
+    }
+
+    .record:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
     .record__label {
       margin: 0;
       color: var(--cyan);
@@ -817,26 +1057,87 @@
       text-transform: uppercase;
       text-align: left;
     }
+
     .record__value {
       margin: 0;
       color: var(--muted);
       text-align: left;
     }
-    .record__value strong { color: var(--green); font-weight: 600; }
-    .record__value ul { margin: 8px 0 0; padding-left: 18px; }
-    .record__value li { margin: 5px 0; }
-    mark { padding: 0 2px; color: var(--ink); background: var(--cyan); }
 
-    .metric-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px; }
-    .metric { padding: 12px; border: 1px solid rgba(134,231,234,.17); background: rgba(134,231,234,.035); }
-    .metric span { display: block; color: var(--faint); font-size: 8px; letter-spacing: .08em; }
-    .metric strong { display: block; margin-top: 3px; color: var(--cyan); font-family: var(--display); font-size: 1.55rem; line-height: 1; }
+    .record__value strong {
+      color: var(--green);
+      font-weight: 600;
+    }
 
-    .section--redacted { border-color: rgba(255,92,92,.22); }
-    .section--redacted:hover { border-color: var(--danger-line); }
-    .section--redacted .section__number, .section--redacted .section__title { color: var(--red); }
-    .section--redacted .section__toggle::before { position: absolute; inset: 0 auto 0 0; width: 3px; content: ""; background: var(--red); opacity: .7; }
-    .section--redacted .section__class { color: rgba(255,92,92,.58); }
+    .record__value ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .record__value li {
+      margin: 5px 0;
+    }
+
+    mark {
+      padding: 0 2px;
+      color: var(--ink);
+      background: var(--cyan);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .metric {
+      padding: 12px;
+      border: 1px solid rgba(134, 231, 234, .17);
+      background: rgba(134, 231, 234, .035);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--faint);
+      font-size: 8px;
+      letter-spacing: .08em;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 3px;
+      color: var(--cyan);
+      font-family: var(--display);
+      font-size: 1.55rem;
+      line-height: 1;
+    }
+
+    .section--redacted {
+      border-color: rgba(255, 92, 92, .22);
+    }
+
+    .section--redacted:hover {
+      border-color: var(--danger-line);
+    }
+
+    .section--redacted .section__number,
+    .section--redacted .section__title {
+      color: var(--red);
+    }
+
+    .section--redacted .section__toggle::before {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      content: "";
+      background: var(--red);
+      opacity: .7;
+    }
+
+    .section--redacted .section__class {
+      color: rgba(255, 92, 92, .58);
+    }
 
     .redaction {
       position: relative;
@@ -845,28 +1146,92 @@
       overflow: hidden;
       cursor: not-allowed;
       background:
-        repeating-linear-gradient(-45deg, rgba(255,92,92,.025) 0 7px, transparent 7px 14px),
+        repeating-linear-gradient(-45deg, rgba(255, 92, 92, .025) 0 7px, transparent 7px 14px),
         rgba(5, 9, 14, .74);
     }
-    .redaction::before { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg, transparent, rgba(255,92,92,.05), transparent); transform: translateX(-100%); }
-    .redaction:hover::before { animation: breachScan 1s ease; }
-    .redaction__stamp { position: absolute; top: 50%; left: 50%; padding: 8px 16px; color: var(--red); border: 2px solid currentColor; font-family: var(--display); font-size: clamp(1.2rem, 4vw, 2.1rem); font-weight: 700; letter-spacing: .12em; transform: translate(-50%, -50%) rotate(-4deg); opacity: .86; white-space: nowrap; }
-    .redaction__lines { display: grid; gap: 11px; opacity: .3; }
-    .redaction__line { height: 13px; background: #020304; box-shadow: 0 0 0 1px rgba(255,255,255,.025); }
-    .redaction__line:nth-child(2) { width: 81%; }
-    .redaction__line:nth-child(3) { width: 93%; }
-    .redaction__line:nth-child(4) { width: 64%; }
-    .redaction__line:nth-child(5) { width: 76%; }
-    .redaction__code { position: absolute; right: 15px; bottom: 10px; color: rgba(255,92,92,.48); font-size: 9px; }
 
-    /* ===== ИСПРАВЛЕННЫЙ ОТСТУП ДЛЯ "Аварийная дешифрация" (ПУНКТ 8) ===== */
-    .section--unlocked { border-color: rgba(226,182,61,.4); }
-    .section--unlocked .section__number, .section--unlocked .section__title { color: var(--amber); }
-    .unlocked-record { color: #b6a883; }
+    .redaction::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, transparent, rgba(255, 92, 92, .05), transparent);
+      transform: translateX(-100%);
+    }
+
+    .redaction:hover::before {
+      animation: breachScan 1s ease;
+    }
+
+    .redaction__stamp {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding: 8px 16px;
+      color: var(--red);
+      border: 2px solid currentColor;
+      font-family: var(--display);
+      font-size: clamp(1.2rem, 4vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: .12em;
+      transform: translate(-50%, -50%) rotate(-4deg);
+      opacity: .86;
+      white-space: nowrap;
+    }
+
+    .redaction__lines {
+      display: grid;
+      gap: 11px;
+      opacity: .3;
+    }
+
+    .redaction__line {
+      height: 13px;
+      background: #020304;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .025);
+    }
+
+    .redaction__line:nth-child(2) {
+      width: 81%;
+    }
+
+    .redaction__line:nth-child(3) {
+      width: 93%;
+    }
+
+    .redaction__line:nth-child(4) {
+      width: 64%;
+    }
+
+    .redaction__line:nth-child(5) {
+      width: 76%;
+    }
+
+    .redaction__code {
+      position: absolute;
+      right: 15px;
+      bottom: 10px;
+      color: rgba(255, 92, 92, .48);
+      font-size: 9px;
+    }
+
+    .section--unlocked {
+      border-color: rgba(226, 182, 61, .4);
+    }
+
+    .section--unlocked .section__number,
+    .section--unlocked .section__title {
+      color: var(--amber);
+    }
+
+    .unlocked-record {
+      color: #b6a883;
+    }
+
     .section--unlocked .record {
       grid-template-columns: 180px minmax(0, 1fr);
       gap: 18px;
     }
+
     .section--unlocked .record__label {
       color: var(--amber);
       font-size: 12px;
@@ -878,16 +1243,51 @@
       padding: clamp(22px, 5vw, 44px);
       text-align: center;
       border: 1px solid var(--danger-line);
-      background: linear-gradient(90deg, rgba(255,92,92,.05), transparent 25% 75%, rgba(255,92,92,.05));
+      background: linear-gradient(90deg, rgba(255, 92, 92, .05), transparent 25% 75%, rgba(255, 92, 92, .05));
     }
-    .restriction__title { margin: 0; color: var(--red); font-family: var(--display); font-size: clamp(1.5rem, 4vw, 3.4rem); line-height: 1; letter-spacing: .12em; text-transform: uppercase; }
-    .restriction p { max-width: 700px; margin: 15px auto 0; color: var(--muted); font-size: 11px; }
 
-    .footer { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; padding: 26px 4px 0; color: var(--faint); font-size: 9px; letter-spacing: .11em; text-transform: uppercase; }
-    .footer strong { color: var(--red); }
-    .level-badge { display: inline-grid; place-items: center; min-width: 82px; padding: 6px 10px; color: var(--red); border: 1px solid var(--danger-line); }
+    .restriction__title {
+      margin: 0;
+      color: var(--red);
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
 
-    /* ===== ЛОГ ДЕЙСТВИЙ ВНИЗУ СТРАНИЦЫ ===== */
+    .restriction p {
+      max-width: 700px;
+      margin: 15px auto 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-end;
+      padding: 26px 4px 0;
+      color: var(--faint);
+      font-size: 9px;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .footer strong {
+      color: var(--red);
+    }
+
+    .level-badge {
+      display: inline-grid;
+      place-items: center;
+      min-width: 82px;
+      padding: 6px 10px;
+      color: var(--red);
+      border: 1px solid var(--danger-line);
+    }
+
     .action-log {
       margin-top: 20px;
       padding: 12px 16px;
@@ -900,33 +1300,41 @@
       scrollbar-width: thin;
       scrollbar-color: var(--line) transparent;
     }
+
     .action-log::-webkit-scrollbar {
       width: 4px;
     }
+
     .action-log::-webkit-scrollbar-track {
       background: transparent;
     }
+
     .action-log::-webkit-scrollbar-thumb {
       background: var(--line-strong);
       border-radius: 4px;
     }
+
     .action-log-entry {
       padding: 2px 0;
-      border-bottom: 1px solid rgba(103,245,138,.05);
+      border-bottom: 1px solid rgba(103, 245, 138, .05);
       color: var(--muted);
       font-family: var(--mono);
       letter-spacing: 0.02em;
     }
+
     .action-log-entry .time {
       color: var(--faint);
       margin-right: 12px;
     }
+
     .action-log-entry .action {
       color: var(--green);
     }
+
     .action-log-entry .action.error {
       color: var(--red);
     }
+
     .action-log-entry .action.success {
       color: var(--green-hot);
     }
@@ -939,33 +1347,106 @@
       background: #0a1019;
       box-shadow: 0 30px 100px #000;
     }
-    .modal::backdrop { background: rgba(2, 5, 9, .84); backdrop-filter: blur(5px); }
-    .modal__header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; color: var(--red); border-bottom: 1px solid var(--danger-line); background: rgba(255,92,92,.05); font-size: 10px; letter-spacing: .1em; }
-    .modal__close { width: 30px; height: 30px; border: 0; background: transparent; cursor: pointer; font-size: 20px; }
-    .modal__body { padding: clamp(22px, 5vw, 38px); }
-    .modal__title { margin: 0 0 14px; color: var(--red); font-family: var(--display); font-size: 2rem; line-height: 1; letter-spacing: .06em; }
-    .modal__copy { color: var(--muted); }
-    .password-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 24px; }
-    .password-form input { min-width: 0; padding: 12px; color: var(--green); border: 1px solid var(--line); background: #060a10; }
-    .password-form button { padding: 12px 16px; border: 1px solid var(--line-strong); background: rgba(103,245,138,.08); cursor: pointer; }
-    .form-message { min-height: 1.5em; margin: 10px 0 0; color: var(--red); font-size: 10px; }
-    .breach-log { display: none; margin: 20px 0 0; padding: 14px; color: var(--green); border-left: 2px solid var(--green); background: #060a10; font-size: 10px; white-space: pre-line; }
-    .breach-log.active { display: block; }
 
-    /* ===== ТЁМНАЯ ТЕМА (УЛУЧШЕННАЯ) ===== */
+    .modal::backdrop {
+      background: rgba(2, 5, 9, .84);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      color: var(--red);
+      border-bottom: 1px solid var(--danger-line);
+      background: rgba(255, 92, 92, .05);
+      font-size: 10px;
+      letter-spacing: .1em;
+    }
+
+    .modal__close {
+      width: 30px;
+      height: 30px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .modal__body {
+      padding: clamp(22px, 5vw, 38px);
+    }
+
+    .modal__title {
+      margin: 0 0 14px;
+      color: var(--red);
+      font-family: var(--display);
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: .06em;
+    }
+
+    .modal__copy {
+      color: var(--muted);
+    }
+
+    .password-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .password-form input {
+      min-width: 0;
+      padding: 12px;
+      color: var(--green);
+      border: 1px solid var(--line);
+      background: #060a10;
+    }
+
+    .password-form button {
+      padding: 12px 16px;
+      border: 1px solid var(--line-strong);
+      background: rgba(103, 245, 138, .08);
+      cursor: pointer;
+    }
+
+    .form-message {
+      min-height: 1.5em;
+      margin: 10px 0 0;
+      color: var(--red);
+      font-size: 10px;
+    }
+
+    .breach-log {
+      display: none;
+      margin: 20px 0 0;
+      padding: 14px;
+      color: var(--green);
+      border-left: 2px solid var(--green);
+      background: #060a10;
+      font-size: 10px;
+      white-space: pre-line;
+    }
+
+    .breach-log.active {
+      display: block;
+    }
+
     body.high-contrast {
       --ink: #000000;
       --ink-elevated: #050505;
-      --panel: rgba(0,0,0,.96);
+      --panel: rgba(0, 0, 0, .96);
       --panel-solid: #000000;
       --green: #00ff41;
       --cyan: #8dfcff;
       --muted: #d2dde4;
       --faint: #94a6b2;
-      --line: rgba(0,255,65,.5);
+      --line: rgba(0, 255, 65, .5);
     }
 
-    /* ===== АНИМАЦИЯ ПАДАЮЩЕГО КОДА (MATRIX) ===== */
     .matrix-rain {
       position: fixed;
       top: 0;
@@ -977,6 +1458,7 @@
       opacity: 0.06;
       overflow: hidden;
     }
+
     .matrix-rain span {
       position: absolute;
       color: var(--green);
@@ -985,88 +1467,500 @@
       animation: matrixFall linear infinite;
       text-shadow: 0 0 5px var(--green);
     }
+
     @keyframes matrixFall {
-      0% { transform: translateY(-100vh) rotate(0deg); opacity: 0.8; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0.2; }
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.2;
+      }
     }
 
-    /* ============================================================
-       ОБЩИЕ АНИМАЦИИ
-       ============================================================ */
-    @keyframes pulse { 50% { opacity: .3; transform: scale(.72); } }
-    @keyframes gridDrift { to { background-position: 42px 42px; } }
-    @keyframes headerScan { to { transform: translateY(240%); } }
-    @keyframes dataRun { 0%,100% { transform: translateX(-110%); } 50% { transform: translateX(270%); } }
-    @keyframes breachScan { to { transform: translateX(100%); } }
+    @keyframes pulse {
+      50% {
+        opacity: .3;
+        transform: scale(.72);
+      }
+    }
+
+    @keyframes gridDrift {
+      to {
+        background-position: 42px 42px;
+      }
+    }
+
+    @keyframes headerScan {
+      to {
+        transform: translateY(240%);
+      }
+    }
+
+    @keyframes dataRun {
+      0%,
+      100% {
+        transform: translateX(-110%);
+      }
+      50% {
+        transform: translateX(270%);
+      }
+    }
+
+    @keyframes breachScan {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
     @keyframes glitchA {
-      0%, 85%, 100% { opacity: 0; clip-path: inset(0 0 0 0); }
-      15%, 30% { opacity: .65; clip-path: inset(10% 0 60%); }
-      45%, 60% { opacity: .55; clip-path: inset(70% 0 20%); }
-    }
-    @keyframes glitchB {
-      0%, 80%, 100% { opacity: 0; }
-      10%, 25% { opacity: .55; clip-path: inset(40% 0 30%); }
-      50%, 70% { opacity: .5; clip-path: inset(5% 0 75%); }
+      0%,
+      85%,
+      100% {
+        opacity: 0;
+        clip-path: inset(0 0 0 0);
+      }
+      15%,
+      30% {
+        opacity: .65;
+        clip-path: inset(10% 0 60%);
+      }
+      45%,
+      60% {
+        opacity: .55;
+        clip-path: inset(70% 0 20%);
+      }
     }
 
-    /* ============================================================
-       МЕДИА-ЗАПРОСЫ
-       ============================================================ */
+    @keyframes glitchB {
+      0%,
+      80%,
+      100% {
+        opacity: 0;
+      }
+      10%,
+      25% {
+        opacity: .55;
+        clip-path: inset(40% 0 30%);
+      }
+      50%,
+      70% {
+        opacity: .5;
+        clip-path: inset(5% 0 75%);
+      }
+    }
+
+    /* ===== КОНТЕНТ СТРАНИЦ ===== */
+    .page-content {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .page-content .section-block {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(15, 25, 37, .93), rgba(8, 14, 22, .97));
+      overflow: clip;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .page-content .section-block:hover {
+      border-color: rgba(0, 255, 65, 0.35);
+      box-shadow: 0 0 8px rgba(0, 255, 65, 0.08), inset 0 0 8px rgba(0, 255, 65, 0.02);
+    }
+
+    .page-content .section-block .block-header {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      padding: 14px 18px;
+      min-height: 64px;
+      background: rgba(0, 255, 65, 0.03);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page-content .section-block .block-number {
+      color: var(--cyan);
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .page-content .section-block .block-title {
+      color: #a9f3b8;
+      font-family: var(--display);
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .page-content .section-block .block-body {
+      padding: clamp(16px, 2.5vw, 28px);
+    }
+
+    .page-content .section-block .block-body .record {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(103, 245, 138, .08);
+      text-align: left;
+    }
+
+    .page-content .section-block .block-body .record:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .page-content .section-block .block-body .record:first-child {
+      padding-top: 0;
+    }
+
+    .page-content .section-block .block-body .record__label {
+      margin: 0;
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .page-content .section-block .block-body .record__value {
+      margin: 0;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    .page-content .section-block .block-body .record__value strong {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .page-content .section-block .block-body .record__value .highlight {
+      color: var(--green-hot);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    }
+
+    .page-content .section-block .block-body .record__value .warn {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .page-content .section-block .block-body .record__value .danger {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .page-content .section-block .block-body .record__value ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      list-style: none;
+    }
+
+    .page-content .section-block .block-body .record__value ul li {
+      position: relative;
+      padding-left: 18px;
+      margin: 5px 0;
+      color: var(--muted);
+    }
+
+    .page-content .section-block .block-body .record__value ul li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+    }
+
+    .page-content .section-block .block-body .note-box {
+      border-left: 2px solid var(--amber);
+      padding: 12px 16px;
+      margin: 15px 0 0 0;
+      background: rgba(226, 182, 91, 0.06);
+      border-radius: 0 4px 4px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .page-content .section-block .block-body .note-box strong {
+      color: var(--amber);
+    }
+
+    /* ===== УВЕЛИЧЕННЫЙ ОТСТУП ДЛЯ ТЕКСТА ===== */
+#page-norm .page-content .section-block .block-body .record .record__label {
+  min-width: 100px;
+  padding-right: 10px;
+}
+
+#page-norm .page-content .section-block .block-body .record .record__value {
+  padding-left: 10px;
+}
+
+#page-norm .page-content .section-block .block-body .record .record__value .indent-text {
+  display: block;
+  padding-left: 0px;
+  margin-top: 4px;
+}
+
+    .page-content .section-block .block-body .record .record__value .indent-text-sm {
+      display: block;
+      padding-left: 20px;
+      margin-top: 2px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .record__value .mt-1 {
+      margin-top: 6px;
+    }
+
     @media (max-width: 1024px) {
-      .archive-layout { grid-template-columns: 220px minmax(0, 1fr); }
-      .metric-grid { grid-template-columns: repeat(3, 1fr); }
-      .index-list a { font-size: 9px; }
-      .masthead::before { left: 58%; }
-      .command-rail { grid-template-columns: minmax(140px, 1fr) auto auto auto auto; }
+      .archive-layout {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+      .metric-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .index-list a {
+        font-size: 9px;
+      }
+      .masthead::before {
+        left: 58%;
+      }
+      .command-rail {
+        grid-template-columns: minmax(140px, 1fr) auto auto auto auto;
+      }
     }
 
     @media (max-width: 767px) {
-      body { font-size: 12px; }
-      .shell { width: min(100% - 16px, 680px); padding-top: 8px; }
-      .masthead { grid-template-columns: 1fr; min-height: auto; padding: 24px 18px; }
-      .masthead::before { display: none; }
-      .brand__title { font-size: clamp(2.45rem, 15vw, 4.6rem); line-height: .82; }
-      .meta { min-width: 0; }
-      .meta__row { grid-template-columns: 80px 1fr; }
-      .command-rail { position: relative; top: auto; grid-template-columns: 1fr 1fr; gap: 4px; }
-      .search-wrap { grid-column: 1 / -1; }
-      .control { padding-inline: 6px; font-size: 8px; min-height: 32px; }
-      .status-indicator { font-size: 8px; }
-      .auth-banner { grid-template-columns: 1fr auto; }
-      .auth-banner__line { display: none; }
-      .archive-layout { display: block; }
-      .index-panel { position: relative; top: auto; margin-bottom: 12px; }
-      .index-list { grid-template-columns: repeat(4, 1fr); }
-      .index-list a { display: block; padding: 8px 4px; text-align: center; border: 1px solid rgba(103,245,138,.1); }
-      .index-list a span:last-child { display: none; }
-      .clearance-card { display: flex; justify-content: space-between; align-items: center; }
-      .section__toggle { grid-template-columns: 40px minmax(0, 1fr) 22px; gap: 10px; min-height: 70px; padding: 10px 12px; }
-      .section__number { font-size: 1.55rem; }
-      .record { grid-template-columns: 1fr; gap: 7px; }
-      .record__label { text-align: left; }
-      .metric-grid { grid-template-columns: repeat(2, 1fr); }
-      .redaction { min-height: 190px; padding: 18px; }
-      .redaction__stamp { white-space: normal; text-align: center; }
-      .password-form { grid-template-columns: 1fr; }
-      .footer { align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+      body {
+        font-size: 12px;
+      }
+      .shell {
+        width: min(100% - 16px, 680px);
+        padding-top: 8px;
+      }
+      .masthead {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 24px 18px;
+      }
+      .masthead::before {
+        display: none;
+      }
+      .brand__title {
+        font-size: clamp(2.45rem, 15vw, 4.6rem);
+        line-height: .82;
+      }
+      .meta {
+        min-width: 0;
+      }
+      .meta__row {
+        grid-template-columns: 80px 1fr;
+      }
+      .nav-tabs {
+        gap: 3px;
+        padding: 8px 10px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: thin;
+      }
+      .nav-tab {
+        padding: 6px 12px;
+        font-size: 9px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-width: 60px;
+        flex: 0 1 auto;
+      }
+      .command-rail {
+        position: relative;
+        top: auto;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+      .search-wrap {
+        grid-column: 1 / -1;
+      }
+      .control {
+        padding-inline: 6px;
+        font-size: 8px;
+        min-height: 32px;
+      }
+      .status-indicator {
+        font-size: 8px;
+      }
+      .auth-banner {
+        grid-template-columns: 1fr auto;
+      }
+      .auth-banner__line {
+        display: none;
+      }
+      .archive-layout {
+        display: block;
+      }
+      .index-panel {
+        position: relative;
+        top: auto;
+        margin-bottom: 12px;
+      }
+      .index-list {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .index-list a {
+        display: block;
+        padding: 8px 4px;
+        text-align: center;
+        border: 1px solid rgba(103, 245, 138, .1);
+      }
+      .index-list a span:last-child {
+        display: none;
+      }
+      .clearance-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .section__toggle {
+        grid-template-columns: 40px minmax(0, 1fr) 22px;
+        gap: 10px;
+        min-height: 70px;
+        padding: 10px 12px;
+      }
+      .section__number {
+        font-size: 1.55rem;
+      }
+      .record {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+      .record__label {
+        text-align: left;
+      }
+      .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .redaction {
+        min-height: 190px;
+        padding: 18px;
+      }
+      .redaction__stamp {
+        white-space: normal;
+        text-align: center;
+      }
+      .password-form {
+        grid-template-columns: 1fr;
+      }
+      .footer {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .page-content .section-block .block-body .record {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .page-content .section-block .block-header {
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 10px;
+        padding: 12px 14px;
+        min-height: 56px;
+      }
+      .page-content .section-block .block-number {
+        font-size: 1.3rem;
+      }
+      /* ===== МОБИЛЬНЫЙ ОТСТУП ===== */
+      .page-content .section-block .block-body .record .record__value .indent-text {
+        padding-left: 16px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      #boot::before, .boot-terminal, .status-light, .input-cursor, .terminal-shake, .matrix-rain span { animation: none !important; }
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      #boot::before,
+      .boot-terminal,
+      .status-light,
+      .input-cursor,
+      .terminal-shake,
+      .matrix-rain span {
+        animation: none !important;
+      }
     }
 
     @media print {
-      :root { color-scheme: light; }
-      body { color: #111; background: #fff; font-size: 10pt; }
-      body::before, body::after, .noise, #boot, .command-rail, .index-panel, .auth-banner, .modal, .action-log, .matrix-rain { display: none !important; }
-      .shell { width: 100%; padding: 0; opacity: 1; transform: none; }
-      .masthead, .section, .restriction { color: #111; border-color: #444; background: #fff; box-shadow: none; break-inside: avoid; }
-      .brand__title, .brand__subtitle, .section__title, .section__number, .record__label, .record__value, .record__value strong { color: #111; text-shadow: none; }
-      .section { opacity: 1; transform: none; }
-      .section__body { grid-template-rows: 1fr !important; border-top-width: 1px; }
-      .redaction { border: 2px solid #000; background: #eee; }
-      .footer { color: #333; }
+      :root {
+        color-scheme: light;
+      }
+      body {
+        color: #111;
+        background: #fff;
+        font-size: 10pt;
+      }
+      body::before,
+      body::after,
+      .noise,
+      #boot,
+      .command-rail,
+      .index-panel,
+      .auth-banner,
+      .modal,
+      .action-log,
+      .matrix-rain {
+        display: none !important;
+      }
+      .shell {
+        width: 100%;
+        padding: 0;
+        opacity: 1;
+        transform: none;
+      }
+      .masthead,
+      .section,
+      .restriction {
+        color: #111;
+        border-color: #444;
+        background: #fff;
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      .brand__title,
+      .brand__subtitle,
+      .section__title,
+      .section__number,
+      .record__label,
+      .record__value,
+      .record__value strong {
+        color: #111;
+        text-shadow: none;
+      }
+      .section {
+        opacity: 1;
+        transform: none;
+      }
+      .section__body {
+        grid-template-rows: 1fr !important;
+        border-top-width: 1px;
+      }
+      .redaction {
+        border: 2px solid #000;
+        background: #eee;
+      }
+      .footer {
+        color: #333;
+      }
     }
   </style>
 </head>
@@ -1074,12 +1968,8 @@
   <a class="skip-link" href="#archive">Перейти к архиву</a>
   <div class="noise" aria-hidden="true"></div>
 
-  <!-- ===== МАТРИЦА (ФОН) ===== -->
   <div class="matrix-rain" id="matrixRain" aria-hidden="true"></div>
 
-  <!-- ============================================================
-       ЗАГРУЗОЧНЫЙ ЭКРАН
-       ============================================================ -->
   <div id="boot" aria-label="SPMG system boot screen">
     <div class="boot-vignette"></div>
     <div id="glitchLine" class="glitch-line"></div>
@@ -1121,435 +2011,1267 @@
     </section>
   </div>
 
-  <!-- ============================================================
-       ОСНОВНОЙ САЙТ
-       ============================================================ -->
   <div class="shell">
-    <!-- ШАПКА САЙТА -->
     <header class="masthead">
       <div class="brand">
-        <p class="brand__kicker">ИНФОРМАЦИОННЫЙ МАТЕРИАЛ | ВЕРСИЯ 1.0 </p>
+        <p class="brand__kicker">ИНФОРМАЦИОННЫЙ МАТЕРИАЛ | ВЕРСИЯ 2.0</p>
         <h1 class="brand__title" data-text="AURUM CORP.">AURUM CORP.</h1>
-        <p class="brand__subtitle">УСТАВ ОТДЕЛА SPMG - УРОВЕНЬ 1</p>
+        <p class="brand__subtitle">ОТДЕЛ SPMG — ДИДАКТИЧЕСКИЙ МАТЕРИАЛ</p>
       </div>
       <dl class="meta" aria-label="Системная информация">
-        <div class="meta__row"><dt>ВЕРСИЯ</dt><dd>1.0.0</dd></div>
+        <div class="meta__row"><dt>ВЕРСИЯ</dt><dd>2.0.0</dd></div>
         <div class="meta__row"><dt>ДАТА</dt><dd id="currentDate">--.--.----</dd></div>
         <div class="meta__row"><dt>ОТДЕЛ</dt><dd>SPMG-04</dd></div>
         <div class="meta__row"><dt>СТАТУС</dt><dd><span class="status" tabindex="0">СИСТЕМА АКТИВНА</span></dd></div>
       </dl>
     </header>
 
-    <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
-    <nav class="command-rail" aria-label="Инструменты">
-      <label class="search-wrap">
-        <span class="sr-only" hidden>ПОИСК</span>
-        <input class="search" id="searchInput" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
-      </label>
-      <button class="control" id="soundToggle" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
-      <button class="control" id="contrastToggle" type="button" aria-pressed="false">КОНТРАСТ</button>
-      <button class="control" id="printButton" type="button">ПЕЧАТЬ</button>
-      <div class="status-indicator">
-        <span class="status-dot online" id="statusDot"></span>
-        <span id="statusLabel">СИСТЕМА ONLINE</span>
-      </div>
+    <!-- ===== НАВИГАЦИОННЫЕ ВКЛАДКИ ===== -->
+    <nav class="nav-tabs" aria-label="Навигация по разделам">
+      <a href="#page-main" class="nav-tab active" data-page="page-main">Главная</a>
+      <a href="#page-patrol" class="nav-tab" data-page="page-patrol">Патрули</a>
+      <a href="#page-training" class="nav-tab" data-page="page-training">Тренировки</a>
+      <a href="#page-events" class="nav-tab" data-page="page-events">Ивенты</a>
+      <a href="#page-cordon" class="nav-tab" data-page="page-cordon">Оцепление</a>
+      <a href="#page-rules" class="nav-tab" data-page="page-rules">Правила Дискорд</a>
+      <a href="#page-norm" class="nav-tab" data-page="page-norm">Норма</a>
+      <a href="#page-punishments" class="nav-tab" data-page="page-punishments">Наказания</a>
+      <a href="#page-vacations" class="nav-tab" data-page="page-vacations">Отпуска</a>
+      <a href="#page-history" class="nav-tab" data-page="page-history">История Кураторов</a>
+      <a href="#page-additional" class="nav-tab" data-page="page-additional">Дополнительно</a>
     </nav>
 
-    <div class="auth-banner" role="status">
-      <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
-      <span class="auth-banner__line" aria-hidden="true"></span>
-      <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+    <!-- ============================================================
+         СТРАНИЦА 1: ГЛАВНАЯ (УСТАВ)
+         ============================================================ -->
+    <div id="page-main" class="page active">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" id="searchInput" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" id="soundToggle" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" id="contrastToggle" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" id="printButton" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online" id="statusDot"></span>
+          <span id="statusLabel">СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <main class="archive-layout" id="archive">
+        <aside class="index-panel" aria-label="Навигация по разделам">
+          <p class="index-panel__label">РЕЕСТР УСТАВА</p>
+          <ol class="index-list" id="indexList">
+            <li><a href="#section-1" data-section="01"><span>01</span><span>Общие положения</span></a></li>
+            <li><a href="#section-2" data-section="02"><span>02</span><span>Права и обязанности</span></a></li>
+            <li><a href="#section-3" data-section="03"><span>03</span><span>Структура отдела</span></a></li>
+            <li><a href="#section-4" data-section="04"><span>04</span><span>Порядок действий</span></a></li>
+            <li><a class="restricted" href="#section-5" data-section="05"><span>05</span><span>Раздел ограниченного доступа</span></a></li>
+            <li><a class="restricted" href="#section-6" data-section="06"><span>06</span><span>Раздел ограниченного доступа</span></a></li>
+            <li><a class="restricted" href="#section-7" data-section="07"><span>07</span><span>Раздел ограниченного доступа</span></a></li>
+            <li><a href="#section-8" data-section="08"><span>08</span><span>Дополнительные сведения</span></a></li>
+            <li><a href="#section-9" data-section="09"><span>09</span><span>Примечания</span></a></li>
+            <li><a href="#section-10" data-section="10"><span>10</span><span>Архивные материалы</span></a></li>
+            <li><a class="restricted" href="#section-11" data-section="11"><span>11</span><span>Раздел ограниченного доступа</span></a></li>
+            <li><a class="restricted" href="#section-12" data-section="12"><span>12</span><span>Раздел ограниченного доступа</span></a></li>
+            <li><a class="restricted" href="#section-13" data-section="13"><span>13</span><span>Раздел ограниченного доступа</span></a></li>
+          </ol>
+          <div class="clearance-card">
+            <span>ТЕКУЩИЙ ДОПУСК</span>
+            <strong>LVL 1</strong>
+          </div>
+        </aside>
+
+        <div class="dossier" id="dossier">
+          <!-- Устав (разделы 1-13) -->
+          <article class="section" id="section-1" data-search="общие положения">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-1">
+              <span class="section__number">01</span>
+              <span>
+                <span class="section__title">Общие положения</span>
+                <span class="section__class">РАЗДЕЛ 1</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-1">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">1.1.</h2>
+                    <p class="record__value">Настоящий устав определяет порядок организации и несения службы сотрудниками отдела SPMG — структурного подразделения в составе TFB корпорации Aurum. Документ является обязательным к исполнению всеми сотрудниками, зачисленными в состав отдела.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">1.2.</h2>
+                    <p class="record__value">Отдел SPMG является штатным подразделением TFB и подчиняется непосредственно командованию TFB, а также офицерскому составу отдела в рамках их полномочий.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">1.3.</h2>
+                    <p class="record__value">Настоящий устав разработан в соответствии с Кодексом Внутреннего Распорядка и общим уставом TFB. В случае противоречия настоящего устава Кодексу или общему уставу TFB, приоритет имеют документы высшей юридической силы.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">1.4.</h2>
+                    <p class="record__value">Изменения и дополнения в настоящий устав вносятся по решению командования TFB или руководства отдела SPMG. Сотрудники оповещаются о внесённых изменениях в установленном порядке.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">1.5.</h2>
+                    <p class="record__value">Незнание устава не освобождает сотрудника от ответственности за его нарушение.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section" id="section-2" data-search="права обязанности">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-2">
+              <span class="section__number">02</span>
+              <span>
+                <span class="section__title">Права и обязанности</span>
+                <span class="section__class">РАЗДЕЛ 2</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-2">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">2.1.</h2>
+                    <p class="record__value"><strong>Сотрудники отдела SPMG имеют право:</strong><br>— на получение полной информации о задачах и целях, поставленных руководством;<br>— на использование служебного снаряжения и вооружения в рамках установленных норм;<br>— на защиту своих прав и законных интересов в порядке, установленном К.В.Р. и уставами Aurum;<br>— на подачу рапортов и обращений к командованию отдела.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">2.2.</h2>
+                    <p class="record__value"><strong>Сотрудники отдела SPMG обязаны:</strong><br>— соблюдать Кодекс Внутреннего Распорядка, настоящий устав и иные нормативные акты Aurum;<br>— выполнять приказы вышестоящих сотрудников в пределах их компетенции;<br>— поддерживать установленную форму одежды и дисциплину;<br>— не разглашать сведения, составляющие служебную тайну;<br>— посещать мероприятия и выполнять установленную норму времени.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section" id="section-3" data-search="структура">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-3">
+              <span class="section__number">03</span>
+              <span>
+                <span class="section__title">Структура отдела</span>
+                <span class="section__class">РАЗДЕЛ 3</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-3">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">3.1.</h2>
+                    <p class="record__value">Отдел SPMG является одним из четырёх основных отделов в составе TFB, наряду с отделами «Сыр-Колбасеры», «USEC» и «Упыри».</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">3.2.</h2>
+                    <p class="record__value"><strong>В состав отдела входят:</strong><br>— командование отдела (куратор, 2 заместителя);<br>— основные боевые группы;<br>— элитное подразделение Apple Special Squad (A.S.S.);</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">3.3.</h2>
+                    <p class="record__value">Назначение и освобождение от должностей производится по решению командования отдела и руководства TFB.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">3.4.</h2>
+                    <p class="record__value">Перевод в другой отдел осуществляется в порядке, установленном общим уставом TFB.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section" id="section-4" data-search="порядок действий">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-4">
+              <span class="section__number">04</span>
+              <span>
+                <span class="section__title">Порядок действий</span>
+                <span class="section__class">РАЗДЕЛ 4</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-4">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">4.1.</h2>
+                    <p class="record__value"><strong>При выполнении служебных задач сотрудник SPMG обязан руководствоваться:</strong><br>— настоящим уставом;<br>— прямыми приказами командования;<br>— Кодексом Внутреннего Распорядка;<br>— иными нормативными актами Aurum.</p>
+                  </div>
+                  <div class="record">
+                    <h2 class="record__label">4.2.</h2>
+                    <p class="record__value">В случае возникновения ситуации, не урегулированной настоящим уставом, сотрудник действует в рамках Кодекса Внутреннего Распорядка и общих приказов командования.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section section--redacted" id="section-5" data-redacted="true" data-search="секретный раздел 5">
+            <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-5">
+              <span class="section__number">05</span>
+              <span>
+                <span class="section__title">Секретный раздел 5</span>
+                <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-5">
+              <div>
+                <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
+                  <div class="redaction__lines">
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                  </div>
+                  <span class="redaction__stamp">██████ ████████</span>
+                  <span class="redaction__code">ШИФР: SPMG-05</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section section--redacted" id="section-6" data-redacted="true" data-search="секретный раздел 6">
+            <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-6">
+              <span class="section__number">06</span>
+              <span>
+                <span class="section__title">Секретный раздел 6</span>
+                <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-6">
+              <div>
+                <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
+                  <div class="redaction__lines">
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                  </div>
+                  <span class="redaction__stamp">██████ ████████</span>
+                  <span class="redaction__code">ШИФР: SPMG-06</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section section--redacted" id="section-7" data-redacted="true" data-search="секретный раздел 7">
+            <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-7">
+              <span class="section__number">07</span>
+              <span>
+                <span class="section__title">Секретный раздел 7</span>
+                <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-7">
+              <div>
+                <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
+                  <div class="redaction__lines">
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                  </div>
+                  <span class="redaction__stamp">██████ ████████</span>
+                  <span class="redaction__code">ШИФР: SPMG-07</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section" id="section-8" data-search="дополнительно">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-8">
+              <span class="section__number">08</span>
+              <span>
+                <span class="section__title">Дополнительные сведения</span>
+                <span class="section__class">РАЗДЕЛ 8</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-8">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">8.1.</h2>
+                    <p class="record__value"><strong>Сотрудникам SPMG рекомендуется:</strong><br>— поддерживать высокий уровень дисциплины и профессионализма;<br>— следить за новыми версиями устава и обновлениями.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section" id="section-9" data-search="примечания">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-9">
+              <span class="section__number">09</span>
+              <span>
+                <span class="section__title">Примечания</span>
+                <span class="section__class">РАЗДЕЛ 9</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-9">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">9.1.</h2>
+                    <p class="record__value">Данный устав является официальным документом отдела SPMG и обязателен к исполнению всеми сотрудниками, зачисленными в состав отдела.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section" id="section-10" data-search="архивация">
+            <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-10">
+              <span class="section__number">10</span>
+              <span>
+                <span class="section__title">Архивация и обновление</span>
+                <span class="section__class">РАЗДЕЛ 10</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-10">
+              <div>
+                <div class="section__content">
+                  <div class="record">
+                    <h2 class="record__label">10.1.</h2>
+                    <p class="record__value">Архивные версии устава хранятся у руководства отдела. Актуальной является версия, опубликованная в установленном порядке.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section section--redacted" id="section-11" data-redacted="true" data-search="секретный раздел 11">
+            <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-11">
+              <span class="section__number">11</span>
+              <span>
+                <span class="section__title">Секретный раздел 11</span>
+                <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-11">
+              <div>
+                <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
+                  <div class="redaction__lines">
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                  </div>
+                  <span class="redaction__stamp">██████ ████████</span>
+                  <span class="redaction__code">ШИФР: SPMG-11</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section section--redacted" id="section-12" data-redacted="true" data-search="секретный раздел 12">
+            <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-12">
+              <span class="section__number">12</span>
+              <span>
+                <span class="section__title">Секретный раздел 12</span>
+                <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-12">
+              <div>
+                <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
+                  <div class="redaction__lines">
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                  </div>
+                  <span class="redaction__stamp">██████ ████████</span>
+                  <span class="redaction__code">ШИФР: SPMG-12</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="section section--redacted" id="section-13" data-redacted="true" data-search="секретный раздел 13">
+            <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-13">
+              <span class="section__number">13</span>
+              <span>
+                <span class="section__title">Секретный раздел 13</span>
+                <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
+              </span>
+            </button>
+            <div class="section__body" id="content-13">
+              <div>
+                <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
+                  <div class="redaction__lines">
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                    <span class="redaction__line"></span>
+                  </div>
+                  <span class="redaction__stamp">██████ ████████</span>
+                  <span class="redaction__code">ШИФР: SPMG-13</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <section class="restriction" aria-label="Предупреждение об ограничении доступа">
+        <h2 class="restriction__title">Доступ ограничен</h2>
+        <p>Вы просматриваете сокращённую копию документа с уровнем допуска 1. Для получения полного доступа требуется авторизация.</p>
+      </section>
     </div>
 
-    <main class="archive-layout" id="archive">
-      <!-- БОКОВОЕ МЕНЮ -->
-      <aside class="index-panel" aria-label="Навигация по разделам">
-        <p class="index-panel__label">РЕЕСТР УСТАВА</p>
-        <ol class="index-list" id="indexList">
-          <li><a href="#section-1" data-section="01"><span>01</span><span>Общие положения</span></a></li>
-          <li><a href="#section-2" data-section="02"><span>02</span><span>Права и обязанности</span></a></li>
-          <li><a href="#section-3" data-section="03"><span>03</span><span>Структура отдела</span></a></li>
-          <li><a href="#section-4" data-section="04"><span>04</span><span>Порядок действий</span></a></li>
-          <li><a class="restricted" href="#section-5" data-section="05"><span>05</span><span>Раздел ограниченного доступа</span></a></li>
-          <li><a class="restricted" href="#section-6" data-section="06"><span>06</span><span>Раздел ограниченного доступа</span></a></li>
-          <li><a class="restricted" href="#section-7" data-section="07"><span>07</span><span>Раздел ограниченного доступа</span></a></li>
-          <li><a href="#section-8" data-section="08"><span>08</span><span>Дополнительные сведения</span></a></li>
-          <li><a href="#section-9" data-section="09"><span>09</span><span>Примечания</span></a></li>
-          <li><a href="#section-10" data-section="10"><span>10</span><span>Архивные материалы</span></a></li>
-          <li><a class="restricted" href="#section-11" data-section="11"><span>11</span><span>Раздел ограниченного доступа</span></a></li>
-          <li><a class="restricted" href="#section-12" data-section="12"><span>12</span><span>Раздел ограниченного доступа</span></a></li>
-          <li><a class="restricted" href="#section-13" data-section="13"><span>13</span><span>Раздел ограниченного доступа</span></a></li>
-        </ol>
-        <div class="clearance-card">
-          <span>ТЕКУЩИЙ ДОПУСК</span>
-          <strong>LVL 1</strong>
+    <!-- ============================================================
+         СТРАНИЦА: ПАТРУЛИ
+         ============================================================ -->
+    <div id="page-patrol" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
         </div>
-      </aside>
+      </nav>
 
-      <!-- ОСНОВНОЕ СОДЕРЖАНИЕ -->
-      <div class="dossier" id="dossier">
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
 
-        <!-- РАЗДЕЛ 1 — Общие положения -->
-        <article class="section" id="section-1" data-search="общие положения">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-1">
-            <span class="section__number">01</span>
-            <span>
-              <span class="section__title">Общие положения</span>
-              <span class="section__class">РАЗДЕЛ 1</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-1">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">1.1.</h2>
-                  <p class="record__value">Настоящий устав определяет порядок организации и несения службы сотрудниками отдела SPMG — структурного подразделения в составе TFB корпорации Aurum. Документ является обязательным к исполнению всеми сотрудниками, зачисленными в состав отдела.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">1.2.</h2>
-                  <p class="record__value">Отдел SPMG является штатным подразделением TFB и подчиняется непосредственно командованию TFB, а также офицерскому составу отдела в рамках их полномочий.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">1.3.</h2>
-                  <p class="record__value">Настоящий устав разработан в соответствии с Кодексом Внутреннего Распорядка и общим уставом TFB. В случае противоречия настоящего устава Кодексу или общему уставу TFB, приоритет имеют документы высшей юридической силы.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">1.4.</h2>
-                  <p class="record__value">Изменения и дополнения в настоящий устав вносятся по решению командования TFB или руководства отдела SPMG. Сотрудники оповещаются о внесённых изменениях в установленном порядке.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">1.5.</h2>
-                  <p class="record__value">Незнание устава не освобождает сотрудника от ответственности за его нарушение.</p>
-                </div>
-              </div>
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">01</span>
+            <span class="block-title">Общие положения</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.1.</h2>
+              <p class="record__value"><strong>Патруль</strong> — это МП, в котором участвуют от <span class="highlight">3 человек</span> (включая проводящего). Один человек — это сам проводящий, остальные — участники.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.2.</h2>
+              <p class="record__value">Участники обязаны <strong>выполнять приказы проводящего</strong> без обсуждений.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.3.</h2>
+              <p class="record__value">Патруль длится минимум <span class="highlight">30 минут</span>, максимум — <span class="highlight">1 час 30 минут</span>.</p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 2 — Права и обязанности -->
-        <article class="section" id="section-2" data-search="права обязанности">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-2">
-            <span class="section__number">02</span>
-            <span>
-              <span class="section__title">Права и обязанности</span>
-              <span class="section__class">РАЗДЕЛ 2</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-2">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">2.1.</h2>
-                  <p class="record__value"><strong>Сотрудники отдела SPMG имеют право:</strong><br>— на получение полной информации о задачах и целях, поставленных руководством;<br>— на использование служебного снаряжения и вооружения в рамках установленных норм;<br>— на защиту своих прав и законных интересов в порядке, установленном К.В.Р. и уставами Aurum;<br>— на подачу рапортов и обращений к командованию отдела.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">2.2.</h2>
-                  <p class="record__value"><strong>Сотрудники отдела SPMG обязаны:</strong><br>— соблюдать Кодекс Внутреннего Распорядка, настоящий устав и иные нормативные акты Aurum;<br>— выполнять приказы вышестоящих сотрудников в пределах их компетенции;<br>— поддерживать установленную форму одежды и дисциплину;<br>— не разглашать сведения, составляющие служебную тайну;<br>— посещать мероприятия и выполнять установленную норму времени.</p>
-                </div>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">02</span>
+            <span class="block-title">Типы патрулей</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">2.1.</h2>
+              <p class="record__value"><span class="highlight">Свободные</span> — проводящий разрешает идти в любой из секторов комплекса.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.2.</h2>
+              <p class="record__value"><span class="highlight">По секторам</span> — проводящий распределяет участников по секторам. Один может быть поставлен в А-сектор, другого — в любое место из Б-сектора.</p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 3 — Структура отдела -->
-        <article class="section" id="section-3" data-search="структура">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-3">
-            <span class="section__number">03</span>
-            <span>
-              <span class="section__title">Структура отдела</span>
-              <span class="section__class">РАЗДЕЛ 3</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-3">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">3.1.</h2>
-                  <p class="record__value">Отдел SPMG является одним из четырёх основных отделов в составе TFB, наряду с отделами «Сыр-Колбасеры», «USEC» и «Упыри».</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">3.2.</h2>
-                  <p class="record__value"><strong>В состав отдела входят:</strong><br>— командование отдела (куратор, 2 заместителя);<br>— основные боевые группы;<br>— элитное подразделение Apple Special Squad (A.S.S.);</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">3.3.</h2>
-                  <p class="record__value">Назначение и освобождение от должностей производится по решению командования отдела и руководства TFB.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">3.4.</h2>
-                  <p class="record__value">Перевод в другой отдел осуществляется в порядке, установленном общим уставом TFB.</p>
-                </div>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">03</span>
+            <span class="block-title">Мега-рейд</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">3.1.</h2>
+              <p class="record__value">Во время патруля может начаться <span class="warn">мега-рейд</span>. В этот момент проводящий начинает командовать бойцами для отбития рейда, и его приказы становятся <strong>приоритетными</strong>.</p>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
+    </div>
 
-        <!-- РАЗДЕЛ 4 — Порядок действий -->
-        <article class="section" id="section-4" data-search="порядок действий">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-4">
-            <span class="section__number">04</span>
-            <span>
-              <span class="section__title">Порядок действий</span>
-              <span class="section__class">РАЗДЕЛ 4</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-4">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">4.1.</h2>
-                  <p class="record__value"><strong>При выполнении служебных задач сотрудник SPMG обязан руководствоваться:</strong><br>— настоящим уставом;<br>— прямыми приказами командования;<br>— Кодексом Внутреннего Распорядка;<br>— иными нормативными актами Aurum.</p>
-                </div>
-                <div class="record">
-                  <h2 class="record__label">4.2.</h2>
-                  <p class="record__value">В случае возникновения ситуации, не урегулированной настоящим уставом, сотрудник действует в рамках Кодекса Внутреннего Распорядка и общих приказов командования.</p>
-                </div>
-              </div>
+    <!-- ============================================================
+         СТРАНИЦА: ТРЕНИРОВКИ
+         ============================================================ -->
+    <div id="page-training" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">01</span>
+            <span class="block-title">Общие положения</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.1.</h2>
+              <p class="record__value"><strong>Тренировка</strong> — это МП, где проверяются и оттачиваются ваши ПВП навыки.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.2.</h2>
+              <p class="record__value">Минимальное количество участников: <span class="highlight">4 человека</span> (не включая проводящего).</p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 5 — Секретный -->
-        <article class="section section--redacted" id="section-5" data-redacted="true" data-search="секретный раздел 5">
-          <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-5">
-            <span class="section__number">05</span>
-            <span>
-              <span class="section__title">Секретный раздел 5</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-5">
-            <div>
-              <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
-                <div class="redaction__lines">
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                </div>
-                <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">ШИФР: SPMG-05</span>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">02</span>
+            <span class="block-title">1 раунд</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">2.1.</h2>
+              <p class="record__value">Игра <span class="highlight">2 на 2</span> с <span class="highlight">10 ОС</span> (возрождений) на карте <span class="highlight">«Меркурий»</span>.</p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 6 — Секретный -->
-        <article class="section section--redacted" id="section-6" data-redacted="true" data-search="секретный раздел 6">
-          <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-6">
-            <span class="section__number">06</span>
-            <span>
-              <span class="section__title">Секретный раздел 6</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-6">
-            <div>
-              <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
-                <div class="redaction__lines">
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                </div>
-                <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">ШИФР: SPMG-06</span>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">03</span>
+            <span class="block-title">2 раунд</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">3.1.</h2>
+              <p class="record__value">Раунд идёт на усмотрение проводящего. Лимит ОС — <span class="highlight">15</span>. Количество людей — неограниченно, но важен <span class="highlight">баланс</span>.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">3.2.</h2>
+              <p class="record__value">Проводящий должен грамотно распределять сильных и слабых. Не стоит ставить сильных против слабых. Исключение — бой между обычными бойцами и бойцами от Севера и т.д.</p>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
+    </div>
 
-        <!-- РАЗДЕЛ 7 — Секретный -->
-        <article class="section section--redacted" id="section-7" data-redacted="true" data-search="секретный раздел 7">
-          <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-7">
-            <span class="section__number">07</span>
-            <span>
-              <span class="section__title">Секретный раздел 7</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-7">
-            <div>
-              <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
-                <div class="redaction__lines">
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                </div>
-                <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">ШИФР: SPMG-07</span>
-              </div>
+    <!-- ============================================================
+         СТРАНИЦА: ИВЕНТЫ
+         ============================================================ -->
+    <div id="page-events" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">01</span>
+            <span class="block-title">Общие положения</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.1.</h2>
+              <p class="record__value"><strong>Ивент</strong> — это фан МП, где люди играют в обычные игры, которые выберет проводящий. Главное — чтобы людям было <span class="highlight">интересно</span>.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.2.</h2>
+              <p class="record__value">Лимит времени: от <span class="highlight">20 минут</span> до <span class="highlight">1 часа</span>. Время за ивент не дают — это МП для отдыха.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.3.</h2>
+              <p class="record__value">Минимум должно прийти <span class="highlight">4 человека</span>, включая проводящего.</p>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
+    </div>
 
-        <!-- РАЗДЕЛ 8 — Дополнительно -->
-        <article class="section" id="section-8" data-search="дополнительно">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-8">
-            <span class="section__number">08</span>
-            <span>
-              <span class="section__title">Дополнительные сведения</span>
-              <span class="section__class">РАЗДЕЛ 8</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-8">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">8.1.</h2>
-                  <p class="record__value"><strong>Сотрудникам SPMG рекомендуется:</strong><br>— поддерживать высокий уровень дисциплины и профессионализма;<br>— следить за новыми версиями устава и обновлениями.</p>
-                </div>
-              </div>
+    <!-- ============================================================
+     СТРАНИЦА: ОЦЕПЛЕНИЕ
+     ============================================================ -->
+<div id="page-cordon" class="page">
+  <nav class="command-rail" aria-label="Инструменты">
+    <label class="search-wrap">
+      <span class="sr-only" hidden>ПОИСК</span>
+      <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+    </label>
+    <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+    <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+    <button class="control" type="button">ПЕЧАТЬ</button>
+    <div class="status-indicator">
+      <span class="status-dot online"></span>
+      <span>СИСТЕМА ONLINE</span>
+    </div>
+  </nav>
+
+  <div class="auth-banner" role="status">
+    <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+    <span class="auth-banner__line" aria-hidden="true"></span>
+    <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+  </div>
+
+  <div class="page-content">
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">01</span>
+        <span class="block-title">Общие положения</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">1.1.</h2>
+          <p class="record__value"><strong>Оцепление</strong> — это отдельный вид патруля, в котором должно быть минимум <span class="highlight">8 человек</span>. Именно столько нужно для оцепления сектора: моста, сектора А, КПП.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">02</span>
+        <span class="block-title">Порядок проведения</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">2.1.</h2>
+          <p class="record__value">Перед проведением оцепления необходимо <span class="highlight">объявить в Рацию</span> о проведении оцепления сектора или участка.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">2.2.</h2>
+          <p class="record__value">На оцеплении <span class="highlight">2 сотрудника Aurum</span> проверяют карточки: 1 — входящих в сектор, 2 — выходящих из сектора.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">2.3.</h2>
+          <p class="record__value">Задаются вопросы по категории: <span class="highlight">«Причина входа в [место]»</span> (кроме сектора А).</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">2.4.</h2>
+          <p class="record__value">Без очереди могут пройти <span class="highlight">Сотрудники Aurum</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="block-body">
+        <div class="note-box">
+          <strong>📌 Примечание:</strong> Подробнее об оцеплениях спрашивайте у Офицеров Отдела.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ============================================================
+         СТРАНИЦА: ПРАВИЛА ДИСКОРД
+         ============================================================ -->
+    <div id="page-rules" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">01</span>
+            <span class="block-title">Раздел 1</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.1.</h2>
+              <p class="record__value"><span class="danger">Запрещается</span> всячески спорить с обычным составом — иначе последует <span class="warn">наказание</span>.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.2.</h2>
+              <p class="record__value">Крайне не советуется спорить с <span class="highlight">офицерами</span>. Вы можете получить от предупреждения до увольнения из ТФБ.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">1.3.</h2>
+              <p class="record__value">Однако, вы имеете право оправдаться перед офицером, если имеете вину перед собой. Вам никто не запрещает оправдываться. Если вам не дают оправдаться — наказание пойдёт офицеру. <span class="warn">Если поступки не имеют оправдания — даже не пытайтесь.</span></p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 9 — Примечания -->
-        <article class="section" id="section-9" data-search="примечания">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-9">
-            <span class="section__number">09</span>
-            <span>
-              <span class="section__title">Примечания</span>
-              <span class="section__class">РАЗДЕЛ 9</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-9">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">9.1.</h2>
-                  <p class="record__value">Данный устав является официальным документом отдела SPMG и обязателен к исполнению всеми сотрудниками, зачисленными в состав отдела.</p>
-                </div>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">02</span>
+            <span class="block-title">Раздел 2</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">2.1.</h2>
+              <p class="record__value"><span class="danger">Запрещается</span> кидать <span class="danger">NSFW, Свастику, 18+ контент, кровь, гифки с фурри и с сексуальным контентом</span> в любой из чатов Discord-сервера.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.2.</h2>
+              <p class="record__value">Относитесь к друг другу с <span class="highlight">уважением</span>. Как никак, вы товарищи.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.3.</h2>
+              <p class="record__value">Не стесняйтесь общаться с людьми как своего, так и других отделов. Заводите друзей, знакомых, связи.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.4.</h2>
+              <p class="record__value">Не орите в ГЧ (можно, если вы никому не мешаете и для рофла), не перебивайте, не разводите конфликт в ГЧ.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.5.</h2>
+              <p class="record__value"><span class="highlight">Самое важное</span> — не стесняйтесь разговаривать в ГЧ, даже если у вас писклявый/ребячий голос. Вас никто не осуждает. А если кто-то осуждает — его съедят заживо. 
             </div>
           </div>
-        </article>
+        </div>
+      </div>
+    </div>
 
-        <!-- РАЗДЕЛ 10 — Архивация -->
-        <article class="section" id="section-10" data-search="архивация">
-          <button class="section__toggle" type="button" aria-expanded="true" aria-controls="content-10">
-            <span class="section__number">10</span>
-            <span>
-              <span class="section__title">Архивация и обновление</span>
-              <span class="section__class">РАЗДЕЛ 10</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-10">
-            <div>
-              <div class="section__content">
-                <div class="record">
-                  <h2 class="record__label">10.1.</h2>
-                  <p class="record__value">Архивные версии устава хранятся у руководства отдела. Актуальной является версия, опубликованная в установленном порядке.</p>
-                </div>
-              </div>
+    <!-- ============================================================
+         СТРАНИЦА: НОРМА
+         ============================================================ -->
+    <!-- ============================================================
+     СТРАНИЦА: НОРМА
+     ============================================================ -->
+<div id="page-norm" class="page">
+  <nav class="command-rail" aria-label="Инструменты">
+    <label class="search-wrap">
+      <span class="sr-only" hidden>ПОИСК</span>
+      <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+    </label>
+    <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+    <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+    <button class="control" type="button">ПЕЧАТЬ</button>
+    <div class="status-indicator">
+      <span class="status-dot online"></span>
+      <span>СИСТЕМА ONLINE</span>
+    </div>
+  </nav>
+
+  <div class="auth-banner" role="status">
+    <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+    <span class="auth-banner__line" aria-hidden="true"></span>
+    <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+  </div>
+
+  <!-- ===== КАРТИНКА ===== -->
+  <div class="record" style="display: block; padding: 0; border: none; margin: 0;">
+    <div class="record__value" style="display: block; padding: 0; margin: 0; text-align: center;">
+      <img src="https://i.imgur.com/SZr2155.jpeg" alt="Норма" style="width: 100%; max-width: 100%; border: 1px solid var(--green); border-radius: 4px; display: block; height: auto; box-sizing: border-box; margin: 0;">
+    </div>
+  </div>
+
+  <!-- ===== ТЕКСТ ПОСЛЕ КАРТИНКИ ===== -->
+  <div class="page-content">
+    <!-- БЛОК 1: НОРМА ДЛЯ АЛЬФЫ Б -->
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">01</span>
+        <span class="block-title">Норма для Альфы Б</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">1.1.</h2>
+          <p class="record__value"><span class="highlight">Боец:</span> −33% от времени, −25% от МП</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">1.2.</h2>
+          <p class="record__value"><span class="highlight">Офицер:</span> −33% от времени, −50% от МП</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">1.3.</h2>
+          <p class="record__value">Округление идёт <span class="highlight">в пользу бойца</span>.</p>
+        </div>
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">1.4.</h2>
+          <p class="record__value">Таблица интерактивна — её можно просматривать и взаимодействовать с листами. Внизу находятся норма и повышения.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- БЛОК 2: КАК РАБОТАЕТ "ОБРАТНОЕ АБ" -->
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">02</span>
+        <span class="block-title">Как работает "Обратное АБ"</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">2.1.</h2>
+          <p class="record__value">Вы зарабатываете баллы за актив и посещение/проведение МП. Каждую неделю баллы <span class="warn">сбрасываются</span>, поэтому тратить их нужно при первой возможности.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- БЛОК 3: НАЧИСЛЕНИЕ БАЛЛОВ -->
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">03</span>
+        <span class="block-title">Начисление баллов</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">3.1.</h2>
+          <p class="record__value">1 посещение МП — <span class="highlight">1.5 балла</span></p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">3.2.</h2>
+          <p class="record__value">1 проведение МП (любое) в отделе — <span class="highlight">2 балла</span></p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">3.3.</h2>
+          <p class="record__value">1 час игры — <span class="highlight">1 балл</span> (суммируется с МП, если там есть 1 час). Считается время за <span class="warn">день</span>, а не за неделю.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">3.4.</h2>
+          <p class="record__value">1 посещение общего МП в Ауруме — <span class="highlight">3 балла</span></p>
+        </div>
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">3.5.</h2>
+          <p class="record__value">Премия Куратора — выдаётся только Куратором, <span class="highlight">1–15 баллов</span> за раз.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- БЛОК 4: ТОВАРЫ -->
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">04</span>
+        <span class="block-title">Товары</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">4.1.</h2>
+          <p class="record__value"><span class="highlight">Снятие наказания</span> — снимает 1 выговор или 1 страйк. Стоит <span class="highlight">15 баллов</span>.<br><span class="warn">Нельзя снять сразу и страйк, и выговор.</span></p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">4.2.</h2>
+          <div class="record__value">
+            <span class="highlight">Уменьшение нормы</span> — <span class="highlight">20 баллов</span>.<br>
+            <span class="indent-text"><strong>Для начального состава:</strong> −1 час, −1 МП.</span>
+            <span class="indent-text"><strong>Для мл. офицерского состава:</strong> −1 час, −1 МП, −1 проведение МП.</span>
+            <span class="indent-text"><span class="warn">Действует 1 раз в 2 недели.</span> Схема: 1 неделя копите, в конце покупаете на следующую. На этой неделе купить следующее уменьшение нельзя.</span>
+          </div>
+        </div>
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">4.3.</h2>
+          <div class="record__value">
+            <span class="highlight">Досрочное повышение</span> — повышение на 1 звание. Стоит <span class="highlight">25 баллов</span>.<br>
+            <span class="indent-text"><span class="warn">Действует только до звания «Капрал»</span>, чтобы в офицеры попадали по навыкам, а не по активу.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ============================================================
+         СТРАНИЦА: НАКАЗАНИЯ
+         ============================================================ -->
+    <div id="page-punishments" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">01</span>
+            <span class="block-title">Нарушения</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.</h2>
+              <p class="record__value">Незнание или несоблюдение ПОВР и правил Virus RP<br><span class="warn">Наказание:</span> 1-2 страйка.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.</h2>
+              <p class="record__value">Выход из базы без формы (АКА — Морф)<br><span class="warn">Наказание:</span> 1 выговор.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">3.</h2>
+              <p class="record__value">Неподчинение, неуважение к Офицерам<br><span class="warn">Наказание:</span> 1 выговор — 1 страйк.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">4.</h2>
+              <p class="record__value">Оскорбление своих товарищей<br><span class="warn">Наказание:</span> 1 страйк.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">5.</h2>
+              <p class="record__value">Разжигание, поддержка конфликта<br><span class="warn">Наказание:</span> 1 выговор — 2 страйка.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">6.</h2>
+              <p class="record__value">Непослушание приказам проводящего (если приказ не нарушает правил)<br><span class="warn">Наказание:</span> 1 страйк.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">7.</h2>
+              <p class="record__value">Крики, перебивание в ГЧ<br><span class="warn">Наказание:</span> 1 выговор — 1 страйк.</p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 11 — Секретный -->
-        <article class="section section--redacted" id="section-11" data-redacted="true" data-search="секретный раздел 11">
-          <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-11">
-            <span class="section__number">11</span>
-            <span>
-              <span class="section__title">Секретный раздел 11</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-11">
-            <div>
-              <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
-                <div class="redaction__lines">
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                </div>
-                <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">ШИФР: SPMG-11</span>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">02</span>
+            <span class="block-title">Отработка</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.</h2>
+              <p class="record__value"><span class="highlight">Ожидание.</span> Ждать 30 дней (месяц) без нарушений. Если получите ещё одно нарушение — таймер сбросится. Для выговора — <span class="highlight">2 недели</span>.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.</h2>
+              <p class="record__value"><span class="highlight">Проявление.</span> Показать себя перед вышестоящими отдела — помочь или произвести хорошее впечатление. Нужно постараться.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">3.</h2>
+              <p class="record__value"><span class="highlight">Покупка.</span> Накопить валюту отдела и снять страйк.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">4.</h2>
+              <p class="record__value"><span class="highlight">Отработка от офицера.</span> Даётся лично офицером в зависимости от вас. Будет сложно отработать.</p>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
+    </div>
 
-        <!-- РАЗДЕЛ 12 — Секретный -->
-        <article class="section section--redacted" id="section-12" data-redacted="true" data-search="секретный раздел 12">
-          <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-12">
-            <span class="section__number">12</span>
-            <span>
-              <span class="section__title">Секретный раздел 12</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-12">
-            <div>
-              <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
-                <div class="redaction__lines">
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                </div>
-                <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">ШИФР: SPMG-12</span>
-              </div>
+    <!-- ============================================================
+         СТРАНИЦА: ОТПУСКА
+         ============================================================ -->
+    <div id="page-vacations" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">01</span>
+            <span class="block-title">Правила отпуска</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.</h2>
+              <p class="record__value">Если вы вступили во фракцию меньше <span class="highlight">2 недель</span> назад — отпуск <span class="danger">недоступен</span>. Исключение — уважительная причина (рассматривается офицерами).</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.</h2>
+              <p class="record__value">Отпуск можно брать только <span class="warn">раз в 2 недели</span>. Исключение — уважительная причина.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">3.</h2>
+              <p class="record__value">Отпуск можно брать максимум на <span class="highlight">месяц</span>. Исключение — уважительная причина.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">4.</h2>
+              <p class="record__value">Уважительная причина должна быть подтверждена доказательствами: справка из больницы, фото повреждений и т.д.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">5.</h2>
+              <p class="record__value">При отпуске более <span class="highlight">25 дней</span>, роль отдела снимается до окончания отпуска (человек числится в таблице активности).</p>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!-- РАЗДЕЛ 13 — Секретный -->
-        <article class="section section--redacted" id="section-13" data-redacted="true" data-search="секретный раздел 13">
-          <button class="section__toggle" type="button" aria-expanded="false" aria-controls="content-13">
-            <span class="section__number">13</span>
-            <span>
-              <span class="section__title">Секретный раздел 13</span>
-              <span class="section__class">ДОСТУП ОГРАНИЧЕН | ТРЕБУЕТСЯ УРОВЕНЬ 5</span>
-            </span>
-          </button>
-          <div class="section__body" id="content-13">
-            <div>
-              <div class="redaction" role="button" tabindex="0" aria-label="Раздел закрыт. Нажмите для запроса доступа">
-                <div class="redaction__lines">
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                  <span class="redaction__line"></span>
-                </div>
-                <span class="redaction__stamp">██████ ████████</span>
-                <span class="redaction__code">ШИФР: SPMG-13</span>
-              </div>
+        <div class="section-block">
+          <div class="block-header">
+            <span class="block-number">02</span>
+            <span class="block-title">Причины отпуска</span>
+          </div>
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">1.</h2>
+              <p class="record__value"><span class="highlight">Выгорание</span> — усталость от игры или эмоциональное выгорание.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">2.</h2>
+              <p class="record__value"><span class="highlight">Травмы.</span></p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">3.</h2>
+              <p class="record__value"><span class="highlight">Личная жизнь</span> — семья, случаи в вашей жизни или семьи.</p>
+            </div>
+            <div class="record">
+              <h2 class="record__label">4.</h2>
+              <p class="record__value">Иные причины, не входящие в список. Главное, чтобы офицеры могли понять и принять вашу причину.</p>
             </div>
           </div>
-        </article>
+        </div>
 
-      </div> <!-- конец .dossier -->
-    </main>
+        <div class="section-block">
+          <div class="block-body">
+            <div class="note-box">
+              <strong>📌 Примечание:</strong> Если вы часто брали отпуск, офицеры могут отклонить ваш отпуск. Исключение — уважительная причина. Если причина неуважительная — отмена.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- ПРЕДУПРЕЖДЕНИЕ ВНИЗУ -->
-    <section class="restriction" aria-label="Предупреждение об ограничении доступа">
-      <h2 class="restriction__title">Доступ ограничен</h2>
-      <p>Вы просматриваете сокращённую копию документа с уровнем допуска 1. Для получения полного доступа требуется авторизация.</p>
-    </section>
+    <!-- ============================================================
+         СТРАНИЦА: ИСТОРИЯ КУРАТОРОВ (ЗАГЛУШКА)
+         ============================================================ -->
+    <!-- ============================================================
+     СТРАНИЦА: ИСТОРИЯ КУРАТОРОВ
+     ============================================================ -->
+<div id="page-history" class="page">
+  <nav class="command-rail" aria-label="Инструменты">
+    <label class="search-wrap">
+      <span class="sr-only" hidden>ПОИСК</span>
+      <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+    </label>
+    <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+    <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+    <button class="control" type="button">ПЕЧАТЬ</button>
+    <div class="status-indicator">
+      <span class="status-dot online"></span>
+      <span>СИСТЕМА ONLINE</span>
+    </div>
+  </nav>
 
-    <!-- ПОДВАЛ -->
+  <div class="auth-banner" role="status">
+    <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+    <span class="auth-banner__line" aria-hidden="true"></span>
+    <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+  </div>
+
+  <div class="page-content">
+    <!-- ===== ВВЕДЕНИЕ ===== -->
+    <div class="section-block">
+      <div class="block-header">
+        <span class="block-number">◆</span>
+        <span class="block-title">Хронология кураторов SPMG</span>
+      </div>
+      <div class="block-body">
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">Архив</h2>
+          <p class="record__value">Полная хронология смены кураторов отдела SPMG с момента основания. Данные собраны из архивов TFB и личных записей командования.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== РАЗДЕЛ: СТАРОЕ ПОКОЛЕНИЕ ===== -->
+    <div class="section-block">
+      <div class="block-header" style="border-left: 3px solid var(--amber);">
+        <span class="block-number">01</span>
+        <span class="block-title">Старое поколение SPMG (M.P.F.)</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">Слух</h2>
+          <p class="record__value"><span class="highlight">08.09.2022</span> — Встал на Куратора и создал SPMG при M.P.F. Основатель отдела.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">Омни</h2>
+          <p class="record__value"><span class="highlight">21.12.2022</span> — Встал на Куратора при M.P.F. Продолжил развитие отдела.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">Кенако</h2>
+          <p class="record__value"><span class="highlight">05.08.2023</span> — Встал на Куратора при T.F.B., после чего на Капитана и Ординала Альфы. </p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">Ашка</h2>
+          <p class="record__value"><span class="highlight">11.11.2023</span> — Встал на Куратора при T.F.B., после чего и на Капитана.</p>
+        </div>
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">Лунар</h2>
+          <p class="record__value"><span class="highlight">15.11.2024</span> — Встал на Куратора при T.F.B. Р.С., после чего на Капитана, а затем на Канцлера комитета.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== РАЗДЕЛ: НОВОЕ ПОКОЛЕНИЕ ===== -->
+    <div class="section-block">
+      <div class="block-header" style="border-left: 3px solid var(--cyan);">
+        <span class="block-number">02</span>
+        <span class="block-title">Новое поколение SPMG (T.F.B. — Комитет)</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">Андор</h2>
+          <p class="record__value"><span class="highlight">21.02.2025</span> — Встал на Куратора при T.F.B. Р.С.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">Сендернас</h2>
+          <p class="record__value"><span class="highlight">17.05.2025</span> — Встал на Куратора при T.F.B. Р.С. Харизматичный лидер, заложивший основы нового поколения SPMG.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">Виталий</h2>
+          <p class="record__value"><span class="highlight">24.06.2025</span> — Встал на Куратора при T.F.B. Р.С., после чего на Бригадира, а позже на Капитана и Канцлера комитета.</p>
+        </div>
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">Эндерлок</h2>
+          <p class="record__value"><span class="highlight">28.08.2025</span> — Встал на Куратора при T.F.B. Р.С.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== РАЗДЕЛ: НОВЕЙШАЯ ИСТОРИЯ ===== -->
+    <div class="section-block">
+      <div class="block-header" style="border-left: 3px solid var(--green-hot);">
+        <span class="block-number">03</span>
+        <span class="block-title">Новейшая история SPMG</span>
+      </div>
+      <div class="block-body">
+        <div class="record">
+          <h2 class="record__label">Сендернас</h2>
+          <p class="record__value"><span class="highlight">31.05.2026 — 28.06.2026</span> — Встал на Куратора при новом TFB Aurum. Был хорошим и харизматичным куратором с безумно крутыми идеями, но после выгорания написал ПСЖ. Вернулся с новыми силами и встал на Капитана TFB.</p>
+        </div>
+        <div class="record">
+          <h2 class="record__label">Весёлый</h2>
+          <p class="record__value"><span class="highlight">31.05.2026 — н.в.</span> — Встал на Куратора после Сендернаса, переняв его отдел и дав клятву сделать SPMG лучше.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== РАЗДЕЛ: НЫНЕШНЯЯ ВЫШКА ===== -->
+    <div class="section-block" style="border-color: var(--line-strong);">
+      <div class="block-header" style="border-left: 3px solid var(--red);">
+        <span class="block-number">◆</span>
+        <span class="block-title">Нынешняя вышка отдела</span>
+      </div>
+      <div class="block-body">
+        <div class="record" style="border-bottom: none;">
+          <h2 class="record__label">Куратор</h2>
+          <p class="record__value"><span class="highlight">CCGAKKAUNT</span> — бывший и нынешний Куратор SPMG, вернувшийся спустя три года на пост. При нём благодаря реформам и повышению репутации отдела SPMG зажило новой жизнью и получило хороший актив и бонусы при службе. В отдел стремились попасть перспективные люди, которым желалось попасть в Альфу.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ============================================================
+         СТРАНИЦА: ДОПОЛНИТЕЛЬНО (ЗАГЛУШКА)
+         ============================================================ -->
+    <div id="page-additional" class="page">
+      <nav class="command-rail" aria-label="Инструменты">
+        <label class="search-wrap">
+          <span class="sr-only" hidden>ПОИСК</span>
+          <input class="search" type="search" placeholder="ПОИСК..." autocomplete="off" aria-label="Поиск">
+        </label>
+        <button class="control" type="button" aria-pressed="false">ЗВУК: ВЫКЛ</button>
+        <button class="control" type="button" aria-pressed="false">КОНТРАСТ</button>
+        <button class="control" type="button">ПЕЧАТЬ</button>
+        <div class="status-indicator">
+          <span class="status-dot online"></span>
+          <span>СИСТЕМА ONLINE</span>
+        </div>
+      </nav>
+
+      <div class="auth-banner" role="status">
+        <span>[УД - 1] УЧЁТНЫЕ ДАННЫЕ ПОДТВЕРЖДЕНЫ — ПРОТОКОЛ БЕЗОПАСНОСТИ АКТИВЕН</span>
+        <span class="auth-banner__line" aria-hidden="true"></span>
+        <span class="auth-banner__code">СЕССИЯ: SPMG-USER04</span>
+      </div>
+
+      <div class="page-content">
+        <div class="section-block">
+          <div class="block-body">
+            <div class="record">
+              <h2 class="record__label">Soon.</h2>
+              <p class="record__value">67</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         ПОДВАЛ И ЛОГ
+         ============================================================ -->
     <footer class="footer">
       <span><strong>УВЕДОМЛЕНИЕ:</strong> ТОЛЬКО ДЛЯ СОТРУДНИКОВ SPMG</span>
       <span class="level-badge">УРОВЕНЬ 1</span>
     </footer>
 
-    <!-- ===== ЛОГ ДЕЙСТВИЙ ===== -->
     <div class="action-log" id="actionLog">
       <div class="action-log-entry"><span class="time">[СИСТЕМА]</span> <span class="action success">СЕССИЯ ЗАПУЩЕНА</span></div>
     </div>
   </div>
 
-  <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВВОДА ПАРОЛЯ -->
   <dialog class="modal" id="accessModal" aria-labelledby="modalTitle">
     <div class="modal__header">
       <span>ЗАПРОС ДОСТУПА | SPMG-403</span>
@@ -1567,7 +3289,6 @@
     </div>
   </dialog>
 
-  <!-- ===== КНОПКА "НАВЕРХ" (ПУНКТ 6) ===== -->
   <button id="scrollTopBtn" style="
     position: fixed;
     bottom: 30px;
@@ -1810,19 +3531,19 @@
       }
 
       function finishLaunch() {
-        playSuccessSound();
-        launchMessage.classList.add("visible");
-        setTimeout(() => {
-          boot.classList.add("is-fading");
-          setTimeout(() => {
-            boot.remove();
-            document.body.classList.add("ready");
-            // запускаем матрицу после загрузки
-            initMatrixRain();
-          }, 950);
-        }, 850);
-      }
-
+  playSuccessSound();
+  launchMessage.classList.add("visible");
+  setTimeout(() => {
+    boot.classList.add("is-fading");
+    setTimeout(() => {
+      boot.remove();
+      document.body.classList.add("ready");
+      initMatrixRain();
+      // ===== ПРОКРУТКА НАВЕРХ =====
+      window.scrollTo(0, 0);
+    }, 950);
+  }, 850);
+}
       function triggerGlitchLine() {
         if (!document.body.contains(glitchLine)) return;
         glitchLine.classList.remove("active");
@@ -1845,10 +3566,6 @@
 
       runBootSequence();
 
-
-      // ============================================================
-      // МАТРИЦА (АНИМАЦИЯ ПАДАЮЩЕГО КОДА)
-      // ============================================================
       function initMatrixRain() {
         const container = document.getElementById('matrixRain');
         if (!container) return;
@@ -1866,13 +3583,54 @@
         }
       }
 
+      // ============================================================
+      // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ПО ВКЛАДКАМ
+      // ============================================================
+      const tabs = document.querySelectorAll('.nav-tab');
+      const pages = {
+        'page-main': document.getElementById('page-main'),
+        'page-patrol': document.getElementById('page-patrol'),
+        'page-training': document.getElementById('page-training'),
+        'page-events': document.getElementById('page-events'),
+        'page-cordon': document.getElementById('page-cordon'),
+        'page-rules': document.getElementById('page-rules'),
+        'page-norm': document.getElementById('page-norm'),
+        'page-punishments': document.getElementById('page-punishments'),
+        'page-vacations': document.getElementById('page-vacations'),
+        'page-history': document.getElementById('page-history'),
+        'page-additional': document.getElementById('page-additional')
+      };
+
+      function switchPage(pageId) {
+        Object.values(pages).forEach(page => {
+          if (page) page.classList.remove('active');
+        });
+        if (pages[pageId]) {
+          pages[pageId].classList.add('active');
+        }
+        tabs.forEach(tab => {
+          tab.classList.toggle('active', tab.dataset.page === pageId);
+        });
+        const tabName = document.querySelector(`.nav-tab[data-page="${pageId}"]`)?.textContent.trim() || pageId;
+        addLog(`ПЕРЕХОД НА СТРАНИЦУ: ${tabName}`, '');
+        beep(480, 0.025);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const pageId = tab.dataset.page;
+          if (pageId) switchPage(pageId);
+        });
+      });
 
       // ============================================================
       // JS ДЛЯ ОСНОВНОГО САЙТА
       // ============================================================
       const body = document.body;
       const dateOutput = document.getElementById('currentDate');
-      const sections = [...document.querySelectorAll('.section')];
+      const sections = document.querySelectorAll('#page-main .section');
       const accessModal = document.getElementById('accessModal');
       const passwordForm = document.getElementById('passwordForm');
       const passwordInput = document.getElementById('passwordInput');
@@ -1888,7 +3646,6 @@
       let audioContext2 = null;
       let soundEnabled2 = false;
 
-      // ===== ФУНКЦИЯ ДЛЯ ЛОГА ДЕЙСТВИЙ =====
       function addLog(message, type = '') {
         const entry = document.createElement('div');
         entry.className = 'action-log-entry';
@@ -1896,7 +3653,6 @@
         entry.innerHTML = `<span class="time">[${time}]</span> <span class="action ${type}">${message}</span>`;
         actionLog.appendChild(entry);
         actionLog.scrollTop = actionLog.scrollHeight;
-        // Ограничиваем количество записей
         while (actionLog.children.length > 50) {
           actionLog.removeChild(actionLog.firstChild);
         }
@@ -1936,7 +3692,7 @@
         }
       }
 
-      document.querySelectorAll('.section__toggle').forEach((button) => {
+      document.querySelectorAll('#page-main .section__toggle').forEach((button) => {
         button.addEventListener('click', () => {
           const section = button.closest('.section');
           if (section.dataset.redacted === 'true') {
@@ -1958,7 +3714,7 @@
       }, { rootMargin: '100px 0px', threshold: 0.04 });
       sections.forEach((section) => revealObserver.observe(section));
 
-      const navLinks = [...document.querySelectorAll('.index-list a')];
+      const navLinks = document.querySelectorAll('#page-main .index-list a');
       const navObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
@@ -1967,7 +3723,6 @@
       }, { rootMargin: '-25% 0px -68%', threshold: 0 });
       sections.forEach((section) => navObserver.observe(section));
 
-      // ===== КЛИКИ ПО НАВИГАЦИИ (ЛОГ) =====
       navLinks.forEach((link) => {
         link.addEventListener('click', () => {
           const sectionNum = link.dataset.section || '';
@@ -1987,7 +3742,7 @@
         addLog('ОТКРЫТО ОКНО ЗАПРОСА ДОСТУПА', '');
       }
 
-      document.querySelectorAll('.redaction').forEach((redaction) => {
+      document.querySelectorAll('#page-main .redaction').forEach((redaction) => {
         redaction.addEventListener('click', openAccessModal);
         redaction.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' || event.key === ' ') {
@@ -2018,7 +3773,7 @@
       };
 
       function unlockArchive() {
-        document.querySelectorAll('.section--redacted').forEach((section) => {
+        document.querySelectorAll('#page-main .section--redacted').forEach((section) => {
           const redaction = section.querySelector('.redaction');
           redaction.outerHTML = `<div class="section__content unlocked-record"><div class="record"><h2 class="record__label">Аварийная дешифрация</h2><p class="record__value">${unlockedContent[section.id]}</p></div></div>`;
           section.classList.remove('section--redacted');
@@ -2030,7 +3785,7 @@
           const title = section.querySelector('.section__title')?.textContent || '';
           addLog(`РАЗБЛОКИРОВАН СЕКРЕТНЫЙ РАЗДЕЛ ${num}: ${title}`, 'success');
         });
-        document.querySelectorAll('.index-list .restricted').forEach((link) => link.classList.remove('restricted'));
+        document.querySelectorAll('#page-main .index-list .restricted').forEach((link) => link.classList.remove('restricted'));
         addLog('⚠ АРХИВ РАЗБЛОКИРОВАН (АВАРИЙНЫЙ ДОСТУП)', 'success');
         statusDot.className = 'status-dot warning';
         statusLabel.textContent = '⚠ АРХИВ РАЗБЛОКИРОВАН';
@@ -2066,19 +3821,21 @@
         }, 1050);
       });
 
-      searchInput.addEventListener('input', () => {
-        const query = searchInput.value.trim().toLocaleLowerCase('ru');
-        sections.forEach((section) => {
-          const searchable = `${section.dataset.search || ''} ${section.textContent}`.toLocaleLowerCase('ru');
-          const matches = !query || searchable.includes(query);
-          section.classList.toggle('is-hidden-by-search', !matches);
-          section.classList.toggle('is-match', Boolean(query && matches));
-          if (query && matches) toggleSection(section.querySelector('.section__toggle'), true);
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.trim().toLocaleLowerCase('ru');
+          sections.forEach((section) => {
+            const searchable = `${section.dataset.search || ''} ${section.textContent}`.toLocaleLowerCase('ru');
+            const matches = !query || searchable.includes(query);
+            section.classList.toggle('is-hidden-by-search', !matches);
+            section.classList.toggle('is-match', Boolean(query && matches));
+            if (query && matches) toggleSection(section.querySelector('.section__toggle'), true);
+          });
+          if (query.length > 0) {
+            addLog(`🔍 ПОИСК: "${query}"`, '');
+          }
         });
-        if (query.length > 0) {
-          addLog(`🔍 ПОИСК: "${query}"`, '');
-        }
-      });
+      }
 
       soundToggle.addEventListener('click', () => {
         soundEnabled2 = !soundEnabled2;
@@ -2104,7 +3861,6 @@
         if (!event.shiftKey) event.preventDefault();
       });
 
-      // ===== КНОПКА "НАВЕРХ" (ПУНКТ 6) =====
       const scrollBtn = document.getElementById('scrollTopBtn');
       if (scrollBtn) {
         window.addEventListener('scroll', () => {
@@ -2121,7 +3877,6 @@
         });
       }
 
-      // Добавляем авто-лог (случайные технические сообщения)
       setInterval(() => {
         const techMessages = [
           'СИНХРОНИЗАЦИЯ ДАННЫХ...',
@@ -2138,7 +3893,6 @@
       updateDate();
       window.setInterval(updateDate, 60 * 60 * 1000);
 
-      // Добавляем начальный лог
       setTimeout(() => {
         addLog('СИСТЕМА ЗАГРУЖЕНА. ДОБРО ПОЖАЛОВАТЬ.', 'success');
       }, 500);
